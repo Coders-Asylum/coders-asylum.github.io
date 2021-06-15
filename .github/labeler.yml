@@ -1,0 +1,27 @@
+Backend 🔌:
+  - lib/backend/**/*
+
+main.dart 🚨:
+  - lib/main.dart
+
+Frontend 📱:
+  - lib/components/* 
+  - lib/pages/**/*
+
+Assets Update 📦:
+  - lib/assets/*
+  - lib/assets/**/*
+
+Test 🧪:
+  - test/*
+  - test/**/*
+
+pupspec.yaml updated:
+  - pubspec.yaml
+
+Web Files 🕸:
+  - web/**/*
+
+
+Cirrus-CI:
+  - .cirrus.yml
