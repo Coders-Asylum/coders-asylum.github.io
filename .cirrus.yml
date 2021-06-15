@@ -1,0 +1,9 @@
+# get flutter container
+container:
+  image: cirrusci/flutter:latest
+
+test_task:
+  name: Tests
+  pub_cache:
+    folder: ~/.pub-cache
+  test_script: flutter test
