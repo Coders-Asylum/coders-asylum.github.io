@@ -6,4 +6,4 @@ test_task:
   name: Tests
   pub_cache:
     folder: ~/.pub-cache
-  test_script: flutter test
+  test_script: flutter pub run test test -p chromium
