@@ -1,3 +1,5 @@
+import 'dart:ui' as ui show ImageFilter;
+
 import 'package:flutter/material.dart';
 
 /// Featured Post are shown in the Featured Post Tile in the blog page of the website.
@@ -16,7 +18,7 @@ class FeaturedPost {
 
   @override
   String toString() {
-    return '${this.title} written by ${this.title}.\nCategory: ${this.topics}.\nTags: ${this.tags}. Post image url: ${this.imageUrl}';
+    return '${this.title} written by ${this.title}.\nCategory: ${this.topics}.\nTags: ${this.tags}.\nPost image url: ${this.imageUrl}';
   }
 }
 
@@ -138,6 +140,138 @@ class _FeaturedPostTileNavButtonState extends State<FeaturedPostTileNavButton> {
               onPressed: () => widget.scrollFunction(widget.direction),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// This show all the relevant information on the featured post.
+///
+/// This includes the post tile, the author name, the tags, topics included.
+class FeaturedPostInfo extends StatefulWidget {
+  final FeaturedPost featuredPost;
+
+  FeaturedPostInfo({required this.featuredPost});
+
+  _FeaturedPostInfoState createState() => _FeaturedPostInfoState();
+}
+
+class _FeaturedPostInfoState extends State<FeaturedPostInfo> {
+  /// Blur Strength.
+  static const double _blur = 12.0;
+
+  /// corner radius
+  static const double _featuredTileCornerRadius = 12.0;
+
+  /// height of the info container.
+  final double _height = 275.0;
+
+  /// width of the info container.
+  final double _width = 425.0;
+
+  /// The author name from the featured post.
+  String get author => widget.featuredPost.author == null ? 'Anonymus Hacker' : widget.featuredPost.author!;
+
+  /// The title of the featured post.
+  String get title => widget.featuredPost.title;
+
+  /// The tags in the featured post
+  String get tags => list2String(widget.featuredPost.tags, tags: true);
+
+  /// The topics of the featured post.
+  String get topics => list2String(widget.featuredPost.topics);
+
+  /// Converts a list of string to a single string.
+  ///
+  /// if [tags] is true then a '#' is added in start of each string in the given list.
+  String list2String(List<String>? list, {bool tags = false}) {
+    late String _s = '';
+    if (list != null && list.isNotEmpty) {
+      list.forEach((s) {
+        _s += tags ? '#$s ' : '$s ';
+      });
+    }
+    return _s;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: _width,
+      constraints: BoxConstraints(maxHeight: _height),
+      clipBehavior: Clip.antiAlias,
+      padding: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(_featuredTileCornerRadius),
+        border: Border.all(color: Colors.black.withOpacity(0.45), width: 1.0),
+        gradient: LinearGradient(colors: [Colors.black38, Colors.black12], stops: [0.0, 1.0], begin: Alignment(-1.0, -1.0), end: Alignment(1.0, 1.0)),
+      ),
+      child: BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: _blur, sigmaY: _blur),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // topics placeholder.
+            Container(
+              width: _width,
+              height: _height * 0.08,
+              margin: EdgeInsets.only(bottom: 3.0),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  topics,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontFamily: 'Source Code', color: Theme.of(context).primaryColor, fontWeight: FontWeight.w300),
+                ),
+              ),
+            ),
+            // divider.
+            Container(
+              height: _height * 0.008,
+              width: _width - (_width * 0.30),
+              margin: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.circular(3.0)),
+            ),
+            // title place holder.
+            Container(
+              width: _width,
+              constraints: BoxConstraints(maxHeight: _height * 0.25),
+              margin: EdgeInsets.all(5.0),
+              child: Text(
+                title.toUpperCase(),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 4,
+                softWrap: true,
+                textAlign: TextAlign.left,
+                semanticsLabel: 'featuredPostTitle',
+                style: TextStyle(wordSpacing: 3.0, fontSize: 24.0, fontFamily: 'Gobold', color: Theme.of(context).primaryColor, fontWeight: FontWeight.w300),
+              ),
+            ),
+            // Author container
+            Container(
+              height: _height * 0.15,
+              width: _width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  /// todo: add a profile image avatar.
+                  Text('by: $author', style: TextStyle(fontFamily: 'Source Sans', color: Theme.of(context).primaryColor)),
+                ],
+              ),
+            ),
+
+            /// tags place holder
+            Container(
+              height: _height * 0.005,
+              width: _width,
+              child: FittedBox(fit: BoxFit.contain, child: Text(tags, style: TextStyle(fontFamily: 'Sorce Code', color: Theme.of(context).highlightColor))),
+            ),
+          ],
         ),
       ),
     );
