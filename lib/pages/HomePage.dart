@@ -35,27 +35,30 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: LayoutBuilder(
-        builder: (context, constrains) => Stack(
-          alignment: Alignment.center,
-          children: [
-            SizedBox.expand(),
-            PageView(
-              controller: _pageController,
-              allowImplicitScrolling: false,
-              physics: NeverScrollableScrollPhysics(),
-              children: [
-                _HomeScreen(),
-                Container(),
-                Container(),
-                BlogPage(),
-                Container(),
-              ],
-            ),
-            Positioned(top: 0.0, left: 0.0, child: MenuBar(pageController: _pageController)),
-          ],
+    return Semantics(
+      label: 'homePage',
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: LayoutBuilder(
+          builder: (context, constrains) => Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox.expand(),
+              PageView(
+                controller: _pageController,
+                allowImplicitScrolling: false,
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  _HomeScreen(),
+                  Container(),
+                  Container(),
+                  BlogPage(),
+                  Container(),
+                ],
+              ),
+              Positioned(top: 0.0, left: 0.0, child: MenuBar(pageController: _pageController)),
+            ],
+          ),
         ),
       ),
     );
