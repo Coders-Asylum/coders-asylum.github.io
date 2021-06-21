@@ -61,8 +61,9 @@ class _FeaturedPostTileNavDotsState extends State<FeaturedPostTileNavDots> {
           width: i == widget.currentIndex ? _rad + _change : _rad,
           margin: i == widget.currentIndex ? EdgeInsets.fromLTRB(_margin, 0.0, _margin, 0.0) : EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
           decoration: BoxDecoration(
-            color: i == widget.currentIndex ? Theme.of(context).primaryColor.withOpacity(0.5) : Theme.of(context).highlightColor.withOpacity(0.3),
+            color: i == widget.currentIndex ? Colors.black.withOpacity(0.8) : Colors.transparent,
             shape: BoxShape.circle,
+            border: Border.all(color: i == widget.currentIndex ? Colors.transparent : Colors.black, width: 1.5),
           ),
         ),
       ),
