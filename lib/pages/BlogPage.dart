@@ -1,16 +1,14 @@
 import 'dart:async' show Timer;
-import 'dart:ui' as ui show ImageFilter;
 
 import 'package:flutter/material.dart';
-import 'package:web/components/FeaturedPostTileComponents.dart';
+import 'package:web/components/blogPage/FeaturedPostTileComponents.dart';
+import 'package:web/components/blogPage/TopicsTileComponents.dart';
 
 ///todo: remove this.
 const List<FeaturedPost> _featuredPost = [
-  FeaturedPost('Instagram will be Getting new Features for Monetization', ['test'], ['test1'],
-      'https://iammrnerdsite.files.wordpress.com/2020/05/untitled-1.png', 'mr nerd'),
-  FeaturedPost('New ‘Mysterious Jungle’ mode to come in PUBG Mobile on June 1,2020', ['test'], ['test1'],
-      'https://iammrnerdsite.files.wordpress.com/2020/05/ey_visawoae5vlz.jpg', 'mr nerd'),
-  FeaturedPost('DJI Mavic Air- Redefining portability.', ['test'], ['test1'], 'https://iammrnerdsite.files.wordpress.com/2018/01/final_feature.jpg', 'mr nerd'),
+  FeaturedPost('Instagram will be Getting new Features for Monetization', ['test'], ['test1'], '/test/res/test_images/red.jpg', 'mr nerd'),
+  FeaturedPost('New ‘Mysterious Jungle’ mode to come in PUBG Mobile on June 1,2020', ['test'], ['test1'], '/test/res/test_images/green.jpg', 'mr nerd'),
+  FeaturedPost('DJI Mavic Air- Redefining portability.', ['test'], ['test1'], '/test/res/test_images/blue.jpg', 'mr nerd'),
 ];
 
 class BlogPage extends StatefulWidget {
@@ -113,8 +111,8 @@ class _FeaturedTileState extends State<FeaturedTile> with SingleTickerProviderSt
   /// Changes the Feature post to the next/previous post on Button tap.
   void changeFeaturedPost(NavDirection direction) {
     late final double _offset;
-    final double _currentOffset = (widget.screenSize.width - (_margin * 2)) * _currentIndex;
-    final double _change = widget.screenSize.width - (_margin * 2);
+    final double _currentOffset = (widget.screenSize.width) * _currentIndex;
+    final double _change = widget.screenSize.width;
 
     if (direction == NavDirection.forward) {
       if (_currentIndex == _featuredPost.length - 1) {
@@ -161,9 +159,10 @@ class _FeaturedTileState extends State<FeaturedTile> with SingleTickerProviderSt
     return Semantics(
       label: 'featuredPost',
       child: Container(
-        width: widget.screenSize.width - 32,
+        width: widget.screenSize.width,
         height: _featuredTileHeight,
         margin: EdgeInsets.fromLTRB(_margin, 55.0, _margin, 20.0),
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(_featuredTileCornerRadius),
           gradient: LinearGradient(
@@ -186,6 +185,7 @@ class _FeaturedTileState extends State<FeaturedTile> with SingleTickerProviderSt
                   return Container(
                     width: widget.screenSize.width,
                     height: _featuredTileHeight,
+                    clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(_featuredTileCornerRadius),
                     ),
@@ -193,8 +193,13 @@ class _FeaturedTileState extends State<FeaturedTile> with SingleTickerProviderSt
                       alignment: Alignment.center,
                       children: [
                         SizedBox.expand(
-                            //child: _featuredPostImage(i)
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(image: NetworkImage(_featuredPost[i].imageUrl), fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(_featuredTileCornerRadius),
                             ),
+                          ),
+                        ),
                         Positioned(
                           bottom: 60.0,
                           left: 100.0,
@@ -247,12 +252,15 @@ class _TopicsTileState extends State<TopicsTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300.0,
+      height: widget.screenSize.height * 0.35,
       width: widget.screenSize.width - (_margin * 2),
       margin: EdgeInsets.fromLTRB(_margin, _margin / 2, _margin, _margin / 2),
-      decoration: BoxDecoration(
-        color: Theme.of(context).highlightColor,
-        borderRadius: BorderRadius.circular(_rad),
+      decoration: BoxDecoration(color: Theme.of(context).highlightColor.withOpacity(0.1), borderRadius: BorderRadius.circular(_rad)),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [],
       ),
     );
   }
