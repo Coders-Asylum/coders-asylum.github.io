@@ -4,11 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:web/components/blogPage/FeaturedPostTileComponents.dart';
 import 'package:web/components/blogPage/TopicsTileComponents.dart';
 
-///todo: remove this.
+///todo: remove this demo lists.
 const List<FeaturedPost> _featuredPost = [
   FeaturedPost('Instagram will be Getting new Features for Monetization', ['test'], ['test1'], '/test/res/test_images/red.jpg', 'mr nerd'),
   FeaturedPost('New ‘Mysterious Jungle’ mode to come in PUBG Mobile on June 1,2020', ['test'], ['test1'], '/test/res/test_images/green.jpg', 'mr nerd'),
   FeaturedPost('DJI Mavic Air- Redefining portability.', ['test'], ['test1'], '/test/res/test_images/blue.jpg', 'mr nerd'),
+];
+
+const List<Topic> _topics = [
+  Topic(
+    name: 'Flutter',
+    noOfPosts: 105,
+    icon: AssetImage('lib/assets/res/flutterio-icon.png'),
+    description:
+        'Flutter is an open-source UI software development kit created by Google. It is used to develop cross platform applications for Android, iOS, Linux, Mac, Windows, Google Fuchsia, and the web from a single codebase. The first version of Flutter was known as codename "Sky" and ran on the Android operating system.',
+  ),
+  Topic(
+      name: 'Python',
+      icon: AssetImage('lib/assets/res/python-icon.png'),
+      noOfPosts: 65,
+      description:
+          'Python is an interpreted high-level general-purpose programming language. Python\'s design philosophy emphasizes code readability with its notable use of significant indentation.'),
+  Topic(
+      name: 'GoLang',
+      icon: AssetImage('lib/assets/res/golang-icon.png'),
+      noOfPosts: 30,
+      description:
+          'Go is a statically typed, compiled programming language designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson. Go is syntactically similar to C, but with memory safety, garbage collection, structural typing, and CSP-style concurrency.'),
+  Topic(
+      name: 'C++',
+      icon: AssetImage('lib/assets/res/cpp-icon.png'),
+      noOfPosts: 55,
+      description:
+          'Go is a statically typed, compiled programming language designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson. Go is syntactically similar to C, but with memory safety, garbage collection, structural typing, and CSP-style concurrency.'),
+  Topic(name: 'More Topics', text: '+1', noOfPosts: 55, description: 'More Interesting topic, view them all'),
 ];
 
 class BlogPage extends StatefulWidget {
@@ -246,21 +275,67 @@ class TopicsTile extends StatefulWidget {
 }
 
 class _TopicsTileState extends State<TopicsTile> {
+  /// Margin for the topic tile and its widgets
   static const double _margin = 16.0;
+
+  /// Corner radius of the topics tile.
   static const double _rad = 12.0;
+
+  /// Height of each [TopicContainer]
+  static const double _topicContainerHeight = 250.0;
+
+  /// Width of each [TopicContainer]
+  static const double _topicContainerWidth = 190.0;
+
+  /// Size increase percentage of each [TopicContainer]
+  static const double _topicContainerGrowth = 0.5;
+
+  /// Returns the list of topics enclosed inside the [TopicContainer] widget.
+  /// todo: arrange the topic list according to the no of posts.
+  /// todo: add the number of not shown topics at the end of the list.
+  List<Widget> topics(BuildContext context, List<Topic> topics) {
+    late List<Widget> _widgets = [];
+    topics.forEach((t) {
+      _widgets.add(TopicContainer(
+        t,
+        height: _topicContainerHeight,
+        width: _topicContainerWidth,
+        screenSize: widget.screenSize,
+        growth: _topicContainerGrowth,
+      ));
+    });
+    return _widgets;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.screenSize.height * 0.35,
+      height: _topicContainerHeight + 100 + (_topicContainerHeight * _topicContainerGrowth),
       width: widget.screenSize.width - (_margin * 2),
       margin: EdgeInsets.fromLTRB(_margin, _margin / 2, _margin, _margin / 2),
+      padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(color: Theme.of(context).highlightColor.withOpacity(0.1), borderRadius: BorderRadius.circular(_rad)),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [],
+        children: [
+          Container(
+            width: widget.screenSize.width,
+            margin: EdgeInsets.all(_margin / 2),
+            child: Text('VIEW BY TOPICS', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 24.0, fontFamily: 'Gobold')),
+          ),
+          SizedBox(
+            width: widget.screenSize.width,
+            height: _topicContainerHeight + (_topicContainerHeight * _topicContainerGrowth),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: topics(context, _topics),
+            ),
+          ),
+        ],
       ),
     );
   }
