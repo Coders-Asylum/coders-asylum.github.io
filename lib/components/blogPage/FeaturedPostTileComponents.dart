@@ -1,6 +1,7 @@
 import 'dart:ui' as ui show ImageFilter;
 
 import 'package:flutter/material.dart';
+import 'package:web/components/NameIconWidget.dart' show NameIcon;
 
 /// Featured Post are shown in the Featured Post Tile in the blog page of the website.
 ///
@@ -37,8 +38,8 @@ class FeaturedPostTileNavDots extends StatefulWidget {
 }
 
 class _FeaturedPostTileNavDotsState extends State<FeaturedPostTileNavDots> {
-  /// Radius of the dots
-  static const double _rad = 10.0;
+  /// diameter of the dots
+  static const double _dia = 10.0;
 
   /// The change in radius when the dot is active.
   static const double _change = 5.0;
@@ -48,22 +49,28 @@ class _FeaturedPostTileNavDotsState extends State<FeaturedPostTileNavDots> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: _rad + _change + 5.0,
-      width: widget.totalPosts * (_rad + _margin * 2),
-      child: ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        controller: ScrollController(),
-        itemCount: widget.totalPosts,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int i) => Container(
-          height: i == widget.currentIndex ? _rad + _change : _rad,
-          width: i == widget.currentIndex ? _rad + _change : _rad,
-          margin: i == widget.currentIndex ? EdgeInsets.fromLTRB(_margin, 0.0, _margin, 0.0) : EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-          decoration: BoxDecoration(
-            color: i == widget.currentIndex ? Colors.black.withOpacity(0.8) : Colors.transparent,
-            shape: BoxShape.circle,
-            border: Border.all(color: i == widget.currentIndex ? Colors.transparent : Colors.black, width: 1.5),
+    return Semantics(
+      label: 'nav dots',
+      child: Container(
+        height: _dia + _change,
+        width: widget.totalPosts * (_dia + _change + _margin * 2),
+        color: Colors.white,
+        alignment: Alignment.center,
+        child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          controller: ScrollController(),
+          itemCount: widget.totalPosts,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int i) => Container(
+            height: i == widget.currentIndex ? _dia + _change : _dia,
+            width: i == widget.currentIndex ? _dia + _change : _dia,
+            margin: i == widget.currentIndex ? EdgeInsets.fromLTRB(_margin, 0.0, _margin, 0.0) : EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            decoration: BoxDecoration(
+              color: i == widget.currentIndex ? Colors.black.withOpacity(0.8) : Colors.transparent,
+              shape: BoxShape.circle,
+              border: Border.all(color: i == widget.currentIndex ? Colors.transparent : Colors.black, width: 1.5),
+            ),
+            child: Semantics(label: 'dot $i'),
           ),
         ),
       ),
@@ -89,15 +96,14 @@ class FeaturedPostTileNavButton extends StatefulWidget {
   final ScrollController scrollController;
   final FeaturePostScrollFunction scrollFunction;
 
-  const FeaturedPostTileNavButton({Key? key, required this.scrollController, this.direction = NavDirection.forward, required this.scrollFunction})
-      : super(key: key);
+  const FeaturedPostTileNavButton({Key? key, required this.scrollController, this.direction = NavDirection.forward, required this.scrollFunction}) : super(key: key);
 
   _FeaturedPostTileNavButtonState createState() => _FeaturedPostTileNavButtonState();
 }
 
 class _FeaturedPostTileNavButtonState extends State<FeaturedPostTileNavButton> {
-  /// Radius of the button
-  static const double _rad = 55.0;
+  /// Diameter of the button
+  static const double _dia = 55.0;
 
   /// Padding inside the button.
   static const double _pad = 8.0;
@@ -108,37 +114,36 @@ class _FeaturedPostTileNavButtonState extends State<FeaturedPostTileNavButton> {
   /// Sets state of bool [_hover].
   ///
   /// SetState is called to change the state of the button.
-  set _buttonState(bool hover) {
-    setState(() {
-      _hover = hover;
-    });
-  }
+  set _buttonState(bool hover) => setState(() => _hover = hover);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: _rad,
-      width: _rad,
+      height: _dia,
+      width: _dia,
       padding: EdgeInsets.all(_pad),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(_hover ? 0.6 : 0.05),
         shape: BoxShape.circle,
       ),
       alignment: Alignment.center,
-      child: MouseRegion(
-        onEnter: (e) => _buttonState = true,
-        onExit: (e) => _buttonState = false,
-        child: SizedBox.expand(
-          child: RotatedBox(
-            quarterTurns: widget.direction == NavDirection.forward ? 2 : 0,
-            child: IconButton(
-              alignment: Alignment.center,
-              icon: Icon(
-                Icons.arrow_back_ios_rounded,
-                // size: _rad - (_pad * 2),
-                color: Theme.of(context).accentColor.withOpacity(_hover ? 0.8 : 0.3),
+      child: Semantics(
+        label: 'Navigation Button',
+        child: MouseRegion(
+          onEnter: (e) => _buttonState = true,
+          onExit: (e) => _buttonState = false,
+          child: SizedBox.expand(
+            child: RotatedBox(
+              quarterTurns: widget.direction == NavDirection.forward ? 2 : 0,
+              child: IconButton(
+                alignment: Alignment.center,
+                icon: Icon(
+                  Icons.arrow_back_ios_rounded,
+                  // size: _rad - (_pad * 2),
+                  color: Theme.of(context).accentColor.withOpacity(_hover ? 0.8 : 0.3),
+                ),
+                onPressed: () => widget.scrollFunction(widget.direction),
               ),
-              onPressed: () => widget.scrollFunction(widget.direction),
             ),
           ),
         ),
@@ -155,12 +160,13 @@ class FeaturedPostInfo extends StatefulWidget {
 
   FeaturedPostInfo({required this.featuredPost});
 
-  _FeaturedPostInfoState createState() => _FeaturedPostInfoState();
+  FeaturedPostInfoState createState() => FeaturedPostInfoState();
 }
 
-class _FeaturedPostInfoState extends State<FeaturedPostInfo> {
+@visibleForTesting
+class FeaturedPostInfoState extends State<FeaturedPostInfo> {
   /// Blur Strength.
-  static const double _blur = 12.0;
+  static const double _blur = 50.0;
 
   /// corner radius
   static const double _featuredTileCornerRadius = 12.0;
@@ -186,6 +192,7 @@ class _FeaturedPostInfoState extends State<FeaturedPostInfo> {
   /// Converts a list of string to a single string.
   ///
   /// if [tags] is true then a '#' is added in start of each string in the given list.
+  @visibleForTesting
   String list2String(List<String>? list, {bool tags = false}) {
     late String _s = '';
     if (list != null && list.isNotEmpty) {
@@ -206,7 +213,7 @@ class _FeaturedPostInfoState extends State<FeaturedPostInfo> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(_featuredTileCornerRadius),
         border: Border.all(color: Colors.black.withOpacity(0.45), width: 1.0),
-        gradient: LinearGradient(colors: [Colors.black38, Colors.black12], stops: [0.0, 1.0], begin: Alignment(-1.0, -1.0), end: Alignment(1.0, 1.0)),
+        gradient: LinearGradient(colors: [Colors.black26, Colors.black.withOpacity(0.1)], stops: [0.0, 1.0], begin: Alignment(-1.0, -1.0), end: Alignment(1.0, 1.0)),
       ),
       child: BackdropFilter(
         filter: ui.ImageFilter.blur(sigmaX: _blur, sigmaY: _blur),
@@ -232,11 +239,10 @@ class _FeaturedPostInfoState extends State<FeaturedPostInfo> {
             ),
             // divider.
             Container(
-              height: _height * 0.008,
-              width: _width - (_width * 0.30),
-              margin: EdgeInsets.all(5.0),
-              decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.circular(3.0)),
-            ),
+                height: _height * 0.008,
+                width: _width - (_width * 0.30),
+                margin: EdgeInsets.all(5.0),
+                decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.circular(3.0))),
             // title place holder.
             Container(
               width: _width,
@@ -249,28 +255,42 @@ class _FeaturedPostInfoState extends State<FeaturedPostInfo> {
                 softWrap: true,
                 textAlign: TextAlign.left,
                 semanticsLabel: 'featuredPostTitle',
-                style: TextStyle(wordSpacing: 3.0, fontSize: 24.0, fontFamily: 'Gobold', color: Theme.of(context).primaryColor, fontWeight: FontWeight.w300),
+                style: TextStyle(wordSpacing: 3.0, fontSize: 24.0, fontFamily: 'Gobold', color: Colors.white, fontWeight: FontWeight.w300),
               ),
             ),
             // Author container
             Container(
               height: _height * 0.15,
               width: _width,
+              alignment: Alignment.centerLeft,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  /// todo: add a profile image avatar.
-                  Text('by: $author', style: TextStyle(fontFamily: 'Source Sans', color: Theme.of(context).primaryColor)),
+                  Container(
+                    height: _height * 0.15,
+                    width: _height * 0.15,
+                    padding: EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    child: NameIcon(name: author, backgroundColor: Theme.of(context).accentColor, textColor: Colors.white),
+                  ),
+                  Container(
+                      height: _height * 0.15,
+                      width: _width - _height * 0.15 - 20,
+                      alignment: Alignment.centerLeft,
+                      child: FittedBox(fit: BoxFit.contain, child: Text(author, style: TextStyle(fontFamily: 'Source Sans', color: Theme.of(context).primaryColor)))),
                 ],
               ),
             ),
 
             /// tags place holder
             Container(
-              height: _height * 0.005,
+              height: _height * 0.05,
               width: _width,
-              child: FittedBox(fit: BoxFit.contain, child: Text(tags, style: TextStyle(fontFamily: 'Sorce Code', color: Theme.of(context).highlightColor))),
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 0.0),
+              child: FittedBox(fit: BoxFit.contain, child: Text(tags, textAlign: TextAlign.left, style: TextStyle(fontFamily: 'Sorce Code', color: Theme.of(context).highlightColor))),
             ),
           ],
         ),
