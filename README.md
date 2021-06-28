@@ -1,5 +1,5 @@
 # web
-https://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io.svg?branch=master
+[![Build Status](httpshttps://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io.svg?branch=master)](https://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io)
 
 Website for Flutter 101's repo
 
