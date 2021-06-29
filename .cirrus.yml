@@ -15,7 +15,7 @@ task:
 # Auto-Formats the code with specified line length
 task:
   name: Code Formating
-  script: flutter format --line-length=180
+  script: flutter format . --line-length=200
 
 # Analyzes and Lints the dart code according to analysis_options.yml
 task:
