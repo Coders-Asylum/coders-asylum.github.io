@@ -77,7 +77,7 @@ class _HomeScreenState extends State<_HomeScreen> {
   //Scroll Controller for the HomePage
   final ScrollController _scrollController = ScrollController();
 
-  double _pageScrollPosition = 0.0;
+  //double _pageScrollPosition = 0.0;
   ScrollDirection _userScrollDirection = ScrollDirection.idle;
 
   /// Updates the [_pageScrollPosition] and [_userScrollDirection] variables while listening to [_scrollController].
