@@ -63,13 +63,13 @@ task:
 #  runs additional null assertions on the boundaries of migrated and un-migrated code.
   build_script: flutter build web --pub --release --null-assertions
 
-# todo: write the deployment script
-# task:
-#   name: Deploy
-#   only_if: $CIRRUS_BRANCH == 'production'
-#   depends_on:
-#     - Code Fromatting
-#     - Analyze and Lint
-#     - Running Tests Once More
-#     - Bob the Builder (Build Web App)
-#   deploy_script:
+# deployment of built web app
+task:
+  name: Deploy
+  only_if: $CIRRUS_BRANCH == 'production'
+  depends_on:
+    - Code Fromatting
+    - Analyze and Lint
+    - Running Tests Once More
+    - Bob the Builder (Build Web App)
+  deploy_script: ./.ci/deploy.sh 
