@@ -68,7 +68,7 @@ task:
   name: Deploy
   only_if: $CIRRUS_BRANCH == 'production'
   depends_on:
-    - Code Fromatting
+    - Code Formating
     - Analyze and Lint
     - Running Tests Once More
     - Bob the Builder (Build Web App)
