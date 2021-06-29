@@ -4,8 +4,12 @@
 container:
   image: cirrusci/flutter:latest
 
+task:
+  name: Running Flutter Clean
+  script: flutter clean
+
 test_task:
-  name: Running Tests
+  name: Running Local Tests
   pub_cache:
     folder: ~/.pub-cache
 
