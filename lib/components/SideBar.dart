@@ -1,5 +1,3 @@
-import 'dart:math' show pi;
-
 import 'package:flutter/material.dart';
 
 /// todo(@maverick099): Create a class for SideBarItems/Tabs.
@@ -95,6 +93,5 @@ class PosValue {
   final double? right;
   final double top;
 
-  const PosValue({this.left = 0.0, this.right = double.maxFinite, this.top = 0.0})
-      : assert(left == 0.0 || right == 0.0, 'only one of the left or right should be 0.0');
+  const PosValue({this.left = 0.0, this.right = double.maxFinite, this.top = 0.0}) : assert(left == 0.0 || right == 0.0, 'only one of the left or right should be 0.0');
 }

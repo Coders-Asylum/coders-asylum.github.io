@@ -4,12 +4,31 @@
 container:
   image: cirrusci/flutter:latest
 
+# runs flutter clean
+# deletes .dart_tool and build folders if present 
 task:
   name: Running Flutter Clean
+  # runs on all branches expect production
+  only_if: $CIRRUS_BRANCH != 'production'
   script: flutter clean
 
+# Auto-Formats the code with specified line length
+task:
+  name: Code Formating
+  script: flutter format . --line-length=200
+
+# Analyzes and Lints the dart code according to analysis_options.yml
+task:
+  name: Analyze and Lint
+  script: flutter analyze
+
+  
 test_task:
   name: Running Local Tests
+  only_if: $CIRRUS_BRANCH != 'production'
+  depends_on:
+    - Code Formating
+    - Analyze and Lint
   pub_cache:
     folder: ~/.pub-cache
 
@@ -17,3 +36,40 @@ test_task:
 #  runs additional null assertions on the boundaries of migrated and un-migrated code.
   test_script: flutter test --pub --null-assertions
 
+
+test_task:
+  name: Running Tests Once More
+  depends_on:
+    - Code Formating
+    - Analyze and Lint
+  only_if: $CIRRUS_BRANCH == 'production'
+  pub_cache:
+    folder: ~/.pub-cache
+
+#  runs ```flutter pub get ``` before running the tests in the test/ folder
+#  runs additional null assertions on the boundaries of migrated and un-migrated code.
+  test_script: flutter test --pub --null-assertions
+
+# Builds the web app on production branch
+task:
+  name: Bob the Builder (Build Web App)
+  only_if: $CIRRUS_BRANCH == 'production'
+  depends_on:
+    - Code Fromatting
+    - Analyze and Lint
+    - Running Tests Once More
+
+#  runs ```flutter pub get ``` before running the tests in the test/ folder
+#  runs additional null assertions on the boundaries of migrated and un-migrated code.
+  build_script: flutter build web --pub --release --null-assertions
+
+# todo: write the deployment script
+# task:
+#   name: Deploy
+#   only_if: $CIRRUS_BRANCH == 'production'
+#   depends_on:
+#     - Code Fromatting
+#     - Analyze and Lint
+#     - Running Tests Once More
+#     - Bob the Builder (Build Web App)
+#   deploy_script:
