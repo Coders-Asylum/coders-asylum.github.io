@@ -39,10 +39,10 @@ test_task:
 
 test_task:
   name: Running Tests Once More
+  only_if: $CIRRUS_BRANCH == 'production'
   depends_on:
     - Code Formating
     - Analyze and Lint
-  only_if: $CIRRUS_BRANCH == 'production'
   pub_cache:
     folder: ~/.pub-cache
 
@@ -55,7 +55,7 @@ task:
   name: Bob the Builder (Build Web App)
   only_if: $CIRRUS_BRANCH == 'production'
   depends_on:
-    - Code Fromating
+    - Code Formating
     - Analyze and Lint
     - Running Tests Once More
 
