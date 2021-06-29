@@ -55,7 +55,7 @@ task:
   name: Bob the Builder (Build Web App)
   only_if: $CIRRUS_BRANCH == 'production'
   depends_on:
-    - Code Fromatting
+    - Code Fromating
     - Analyze and Lint
     - Running Tests Once More
 
