@@ -51,7 +51,7 @@ test_task:
   test_script: flutter test --pub --null-assertions
 
 # Builds the web app on production branch
-task:
+build_task:
   name: Bob the Builder (Build Web App)
   only_if: $CIRRUS_BRANCH == 'production'
   depends_on:
@@ -64,7 +64,7 @@ task:
   build_script: flutter build web --pub --release --null-assertions
 
 # deployment of built web app
-task:
+deploy_task:
   name: Deploy
   only_if: $CIRRUS_BRANCH == 'production'
   depends_on:
