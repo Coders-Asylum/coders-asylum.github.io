@@ -73,5 +73,5 @@ deploy_task:
     - Running Tests Once More
     - Bob the Builder (Build Web App)
   env:
-    GITHUB_TOKEN: Maverick09ENCRYPTED[323b2424340d76527a19341a764fbbc25d5be1fffb6a389302b52ee18bb2867cd78bf000e4e963620fe7e4b73da39afd]
+    GITHUB_TOKEN: ENCRYPTED[323b2424340d76527a19341a764fbbc25d5be1fffb6a389302b52ee18bb2867cd78bf000e4e963620fe7e4b73da39afd]
   deploy_script: ./.ci/deploy.sh 
