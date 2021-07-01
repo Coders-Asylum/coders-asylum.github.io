@@ -18,7 +18,7 @@ jobs:
          run: flutter test --pub --null-assertions
        
        - name: Cleaning any previous builds
-         run: flutter Clean
+         run: flutter clean
          
        - name: Build Web App
          run:  flutter build web --pub --release --null-assertions
