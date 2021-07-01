@@ -242,17 +242,13 @@ class _FeaturedTileState extends State<FeaturedTile> with SingleTickerProviderSt
               top: _featuredTileHeight / 2 - 50,
               right: 20.0,
               child: FeaturedPostTileNavButton(
-                  scrollController: _featuredPostScrollController,
-                  direction: NavDirection.forward,
-                  scrollFunction: (NavDirection direction) => changeFeaturedPost(direction)),
+                  scrollController: _featuredPostScrollController, direction: NavDirection.forward, scrollFunction: (NavDirection direction) => changeFeaturedPost(direction)),
             ),
             Positioned(
               top: _featuredTileHeight / 2 - 55,
               left: 20.0,
               child: FeaturedPostTileNavButton(
-                  scrollController: _featuredPostScrollController,
-                  direction: NavDirection.backward,
-                  scrollFunction: (NavDirection direction) => changeFeaturedPost(direction)),
+                  scrollController: _featuredPostScrollController, direction: NavDirection.backward, scrollFunction: (NavDirection direction) => changeFeaturedPost(direction)),
             ),
             Positioned(
               left: widget.screenSize.width / 2 - (_featuredPost.length * 15),

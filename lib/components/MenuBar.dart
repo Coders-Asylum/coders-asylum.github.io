@@ -74,8 +74,7 @@ class _MenuBarState extends State<MenuBar> {
             Container(
               height: _menuBarHeight,
               width: _tabs.length * (_tabWidth + 16),
-              child: MenuItems(
-                  tabs: _tabs, tabHeight: _tabHeight, tabWidth: _tabWidth, pageController: widget.pageController, currentPage: (page) => _currentPage = page),
+              child: MenuItems(tabs: _tabs, tabHeight: _tabHeight, tabWidth: _tabWidth, pageController: widget.pageController, currentPage: (page) => _currentPage = page),
             ),
           ],
         ),
@@ -106,8 +105,7 @@ class MenuItems extends StatefulWidget {
   ///
   final CurrentPage currentPage;
 
-  const MenuItems({Key? key, required this.tabs, this.tabHeight = 30.0, this.tabWidth = 100.0, required this.pageController, required this.currentPage})
-      : super(key: key);
+  const MenuItems({Key? key, required this.tabs, this.tabHeight = 30.0, this.tabWidth = 100.0, required this.pageController, required this.currentPage}) : super(key: key);
 
   _MenuItemsState createState() => _MenuItemsState();
 }
@@ -262,6 +260,5 @@ class MenuTab {
   /// Icon that is added to the leading of menu name.
   final IconData? tabIcon;
 
-  const MenuTab({this.imageIcon, this.tabIcon, required this.title})
-      : assert((imageIcon != null || tabIcon != null), ' Any one of the Icon should be provided');
+  const MenuTab({this.imageIcon, this.tabIcon, required this.title}) : assert((imageIcon != null || tabIcon != null), ' Any one of the Icon should be provided');
 }

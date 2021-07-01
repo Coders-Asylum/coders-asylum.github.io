@@ -152,9 +152,7 @@ class _TopicContainerState extends State<TopicContainer> with SingleTickerProvid
                       mouseCursor: SystemMouseCursors.text,
                       children: <TextSpan>[
                         TextSpan(text: "${widget.topic.name}\n", style: TextStyle(fontSize: 20.0, fontFamily: 'Gobold', color: Theme.of(context).primaryColor)),
-                        TextSpan(
-                            text: widget.topic.description,
-                            style: TextStyle(fontSize: 14.0, fontFamily: 'Source Code', color: Theme.of(context).highlightColor)),
+                        TextSpan(text: widget.topic.description, style: TextStyle(fontSize: 14.0, fontFamily: 'Source Code', color: Theme.of(context).highlightColor)),
                       ],
                     ),
                   ),
