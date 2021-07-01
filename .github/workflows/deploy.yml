@@ -28,10 +28,11 @@ jobs:
        - run: git fetch --all
        - run: git config --global user.email ${{ secrets.EMAIL }}
        - run: git config --global user.name ${{ secrets.USERNAME }}
-       - run: git add build/
+       - run: cd build/web/
+       - run: git add --all
        - run: git commit --all -m 'New Build'
-       - name: Push Build to production branch
-         run: git push origin
+       - name: Push Build to live branch
+         run: git push origin live
     
     
   
