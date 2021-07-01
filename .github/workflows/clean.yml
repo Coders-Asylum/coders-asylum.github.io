@@ -39,7 +39,7 @@ jobs:
        - name: Add all modified files
          run: git add --all
        - name: Commit changes
-         run: git commit --all -m 'Formating Changes done on $(date)'
+         run: git commit --all -m 'Formating Changes done'
        
        - name: Push changes
          run: git push origin
