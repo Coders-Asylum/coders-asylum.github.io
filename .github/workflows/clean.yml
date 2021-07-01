@@ -36,6 +36,8 @@ jobs:
          run: git config --global user.email ${{ secrets.EMAIL }}
        - name: Set Username
          run: git config --global user.name ${{ secrets.USERNAME }}
+       - name: Git pull
+         run: git pull origin
        
        - name: Add all modified files
          run: git add --all
