@@ -1,0 +1,47 @@
+  
+name: Clean Flutter Builds and Format Code
+
+on:
+  push:
+    branches:
+      - '**'
+      - !production
+  
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ master ]
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    container:
+      image: cirrusci/flutter:latest
+    steps:
+       - name: Checkout repository
+         uses: actions/checkout@v2
+       
+       - name: Code Formatting
+         run: flutter format . --line-length=200
+        
+       - name: Clean
+         run: Flutter clean
+        
+       - name: Set Git Origin URL
+         run: git remote set-url origin https://${{ secrets.DEPLOY_TOKEN }}@github.com/Coders-Asylum/coders-asylum.github.io.git
+       - name: Fetch Origin
+         run: git fetch --all
+       
+       - name: Set email 
+         run: git config --global user.email ${{ secrets.EMAIL }}
+       - name: Set Username
+         run: git config --global user.name ${{ secrets.USERNAME }}
+       
+       - name: Add all modified files
+         run: git add -all
+       - name: Commit changes
+         run: git commit --all -m 'Formating Changes done on $(date)'
+       
+       - name: Push changes
+         run: git push origin
+ 
+      
