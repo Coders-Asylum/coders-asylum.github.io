@@ -23,9 +23,11 @@ jobs:
        - name: Build Web App
          run:  flutter build web --pub --release --null-assertions
          
+       
+       - run: git remote set-url origin https://${{ secrets.DEPLOY_TOKEN }}github.com/Coders-Asylum/coders-asylum.github.io.git
+       - run: git commit --all -m 'New Build'
        - name: Push Build to production branch
-         run: ./.ci/deploy.sh
-
+         run: git push origin production
     
     
   
