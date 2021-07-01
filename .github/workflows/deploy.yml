@@ -1,1 +1,21 @@
 name: Bob the Builder (Build & Deploy)
+
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
+  buid_and_deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: cirrusci/flutter:latest
+    steps:
+       - name: Checkout repository
+         uses: actions/checkout@v2
+       - name: Echo flutter version
+         run: flutter --version
+      
+    
+  
+    
