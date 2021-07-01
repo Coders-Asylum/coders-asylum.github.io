@@ -37,7 +37,7 @@ jobs:
          run: git config --global user.name ${{ secrets.USERNAME }}
        
        - name: Add all modified files
-         run: git add -all
+         run: git add --all
        - name: Commit changes
          run: git commit --all -m 'Formating Changes done on $(date)'
        
