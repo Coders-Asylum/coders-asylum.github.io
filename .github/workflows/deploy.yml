@@ -13,9 +13,22 @@ jobs:
     steps:
        - name: Checkout repository
          uses: actions/checkout@v2
-       - name: Echo flutter version
-         run: flutter --version
-      
+       
+       - name: Running Local Tests
+         run: flutter test --pub --null-assertions
+       
+       - name: Cleaning any previous builds
+         run: Flutter Clean
+         
+       - name: Build Web App
+         run:  flutter build web --pub --release --null-assertions
+         
+       - name: Upload Build Artifact
+         uses: actions/upload-artifact@v2.2.4
+         with:
+          path: build/
+
+    
     
   
     
