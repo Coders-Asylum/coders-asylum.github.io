@@ -23,10 +23,8 @@ jobs:
        - name: Build Web App
          run:  flutter build web --pub --release --null-assertions
          
-       - name: Upload Build Artifact
-         uses: actions/upload-artifact@v2.2.4
-         with:
-          path: build/
+       - name: Push Build to production branch
+         run: ./.ci/deploy.sh
 
     
     
