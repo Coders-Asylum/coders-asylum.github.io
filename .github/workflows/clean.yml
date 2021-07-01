@@ -24,7 +24,7 @@ jobs:
          run: flutter format . --line-length=200
         
        - name: Clean
-         run: Flutter clean
+         run: flutter clean
         
        - name: Set Git Origin URL
          run: git remote set-url origin https://${{ secrets.DEPLOY_TOKEN }}@github.com/Coders-Asylum/coders-asylum.github.io.git
