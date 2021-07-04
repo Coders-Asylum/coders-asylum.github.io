@@ -58,7 +58,7 @@ do
             fi
 
             CHECK=0
-
+            git push origin
             echo  "Deployed to Live"
         else
             echo "Branch not changed" 1>&2
