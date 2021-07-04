@@ -23,18 +23,9 @@ jobs:
        - name: Build Web App
          run:  flutter build web --pub --release --null-assertions
          
-       - run: git config --global user.email ${{ secrets.EMAIL }}
-       - run: git config --global user.name ${{ secrets.USERNAME }}
-       
-       - run: git remote set-url origin https://${{ secrets.DEPLOY_TOKEN }}@github.com/Coders-Asylum/coders-asylum.github.io.git
-       - run: git fetch --all
-       - run: git pull origin
-#        - run: cd build/web/
-       - run: git add --all
-       - run: git commit --all -m 'New Build'
-       - name: Push Build to live branch
-         run: git subtree push --prefix build/web origin live
-    
-    
-  
-    
+       - name: Deploying Web App
+         env:
+           DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+           USERNAME: ${{ secrets.USERNAME }}
+           EMAIL: ${{ secrets.EMAIL }
+         run: chmod +x ./.ci/deploy.sh ; sh ./.ci/deploy.sh

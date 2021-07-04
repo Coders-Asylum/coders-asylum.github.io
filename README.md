@@ -1,5 +1,5 @@
 # web
-[![](https://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io.svg?branch=master)](https://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io.svg?branch=master)
+[![Tests](https://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io.svg?branch=master)](https://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io.svg?branch=master)
 
 Deployment:
 
