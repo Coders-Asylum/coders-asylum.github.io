@@ -25,7 +25,7 @@ html, body {
 
 @font-face {
     font-family: SourceCodePro;
-    src: url("../../lib/assets/fonts/SourceCodePro-Regular.tff");
+    src: url("../../lib/assets/fonts/SourceCodePro-Regular.ttf");
 }
 
 .dollar {
