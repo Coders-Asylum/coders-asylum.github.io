@@ -31,5 +31,5 @@ jobs:
          env:
            DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
            USERNAME: ${{ secrets.USERNAME }}
-           EMAIL: ${{ secrets.EMAIL }
+           EMAIL: ${{ secrets.EMAIL }}
          run: chmod +x scripts/commit.sh ; sh scripts/commit.sh
