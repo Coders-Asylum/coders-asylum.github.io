@@ -28,4 +28,4 @@ jobs:
            DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
            USERNAME: ${{ secrets.USERNAME }}
            EMAIL: ${{ secrets.EMAIL }
-         run: chmod +x /scripts/deploy.sh ; sh scripts/deploy.sh
+         run: chmod +x ./.ci/deploy.sh ; sh ./.ci/deploy.sh
