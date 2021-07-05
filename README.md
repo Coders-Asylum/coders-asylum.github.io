@@ -2,8 +2,7 @@
 [![Tests](https://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io.svg?branch=master)](https://api.cirrus-ci.com/github/Coders-Asylum/coders-asylum.github.io.svg?branch=master)
 
 Deployment:
-
-[![Bob the Builder (Build & Deploy)](https://github.com/Coders-Asylum/coders-asylum.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Coders-Asylum/coders-asylum.github.io/actions/workflows/deploy.yml)
+[![Bob the Builder (Build & Deploy)](https://github.com/Coders-Asylum/coders-asylum.github.io/actions/workflows/deploy.yml/badge.svg?branch=production)](https://github.com/Coders-Asylum/coders-asylum.github.io/actions/workflows/deploy.yml)
 
 Website for Flutter 101's repo
 
