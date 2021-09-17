@@ -1,0 +1,8 @@
+- name: Codecov
+  uses: codecov/codecov-action@v2.1.0
+  with:
+    token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+#     files: ./coverage1.xml,./coverage2.xml # optional todo: add files
+    flags: unittests, integrationtests
+    name: dart-test-coverage 
+    verbose: true 
