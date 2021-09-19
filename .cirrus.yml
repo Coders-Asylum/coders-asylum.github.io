@@ -54,5 +54,6 @@ test_task:
   only_if: $CIRRUS_BRANCH == 'master'
   depends_on:
     - Analyze and Lint
-  pub_cache: ~/.pub-cache
+  pub_cache: 
+    folder: ~/.pub-cache
   test_script: ./.ci/coverage.sh
