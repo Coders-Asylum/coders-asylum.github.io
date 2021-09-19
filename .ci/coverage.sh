@@ -35,9 +35,11 @@ then
 fi
 
 # This sends a dispatch event
-curl \
-  -X POST \
-  -H "Accept: application/vnd.github.v3+json" \
-  -H "Authorization: Bearer ${COV_POST_TOKEN}" \
-  https://api.github.com/repos/Coders-Asylum/coders-asylum.github.io/dispatches \
-  -d '{"event_type":"coverage_generated"}'
+curl --location --request POST 'https://api.github.com/repos/Coders-Asylum/coders-asylum.github.io/dispatches
+' \
+--header 'Accept: application/vnd.github.v3+json' \
+--header 'Content-Type: application/json' \
+--header "Authorization: Bearer $COV_POST_TOKEN" \
+--data-raw '{
+    "event_type": "coverage_generated"
+}'
