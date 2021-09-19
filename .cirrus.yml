@@ -6,26 +6,25 @@ container:
 
 # runs flutter clean
 # deletes .dart_tool and build folders if present 
-task:
+clean_task:
   name: Running Flutter Clean
   # runs on all branches expect production
   only_if: $CIRRUS_BRANCH != 'production'
   script: flutter clean
 
 # Analyzes and Lints the dart code according to analysis_options.yml
-task:
-  name: Analyze and Lint
+analyze_task:
+  name: Analyze
   script: flutter analyze
 
   
 test_task:
   name: Running Local Tests
-  only_if: $CIRRUS_BRANCH != 'production' && $CIRRUS_BRANCH != 'master' 
+  only_if: $CIRRUS_BRANCH != 'production' 
   depends_on:
     - Analyze and Lint
   pub_cache:
     folder: ~/.pub-cache
-
 #  runs ```flutter pub get ``` before running the tests in the test/ folder
 #  runs additional null assertions on the boundaries of migrated and un-migrated code.
   test_script: flutter test --pub --null-assertions
@@ -33,55 +32,27 @@ test_task:
 
 test_task:
   name: Running Tests Once More
-  only_if: $CIRRUS_BRANCH == 'production'
+  only_if: $CIRRUS_BRANCH == 'production' && $CIRRUS_BRANCH != 'master'
   depends_on:
     - Analyze and Lint
   pub_cache:
     folder: ~/.pub-cache
-
 #  runs ```flutter pub get ``` before running the tests in the test/ folder
 #  runs additional null assertions on the boundaries of migrated and un-migrated code.
   test_script: flutter test --pub --null-assertions
 
+
 # This test runs with generating the coverge report, with null assertions
 # The coverage report is saved under test/coverage/report in lcov.info file.
-  test_task:
-    name: Test and generate coverage report.
-    env:
-      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-      USERNAME: ${{ secrets.USERNAME }}
-      EMAIL: ${{ secrets.EMAIL }}
-      COV_POST_TOKEN: ${{ secrets.COV_POST_KEY }}
-    only_if: $CIRRUS_BRANCH == 'master'
-    depends_on:
-      - Analyze and Lint
-    pub_cache: ~/.pub-cache
-
-    script: chmod +x ./.ci/coverage.sh ; ./.ci/coverage.sh
-
-
-# # Builds the web app on production branch
-# build_task:
-#   name: Bob the Builder (Build Web App)
-#   only_if: $CIRRUS_BRANCH == 'production'
-#   depends_on:
-#     - Code Formating
-#     - Analyze and Lint
-#     - Running Tests Once More
-
-# #  runs ```flutter pub get ``` before running the tests in the test/ folder
-# #  runs additional null assertions on the boundaries of migrated and un-migrated code.
-#   build_script: flutter build web --pub --release --null-assertions
-
-# # deployment of built web app
-# deploy_task:
-#   name: Deploy
-#   only_if: $CIRRUS_BRANCH == 'production'
-#   depends_on:
-#     - Code Formating
-#     - Analyze and Lint
-#     - Running Tests Once More
-#     - Bob the Builder (Build Web App)
-#   env:
-#     GITHUB_TOKEN: ENCRYPTED[323b2424340d76527a19341a764fbbc25d5be1fffb6a389302b52ee18bb2867cd78bf000e4e963620fe7e4b73da39afd]
-#   deploy_script: ./.ci/deploy.sh 
+test_task:
+  name: Running Tests and saving coverage report.
+  env:
+    DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+    USERNAME: ${{ secrets.USERNAME }}
+    EMAIL: ${{ secrets.EMAIL }}
+    COV_POST_TOKEN: ${{ secrets.COV_POST_KEY }}
+  only_if: $CIRRUS_BRANCH == 'master'
+  depends_on:
+    - Analyze and Lint
+  pub_cache: ~/.pub-cache
+  script: ./.ci/coverage.sh

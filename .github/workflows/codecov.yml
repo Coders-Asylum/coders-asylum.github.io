@@ -1,7 +1,5 @@
 name: Rita Reporter (Coverage Reporter)
 on:
-  push:
-    branches: [master]
   repository_dispatch:
     types: [coverage_generated]
     
