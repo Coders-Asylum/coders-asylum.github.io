@@ -1,8 +1,8 @@
-- name: Codecov
+name: Covergae Report
   uses: codecov/codecov-action@v2.1.0
   with:
     token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-#     files: ./coverage1.xml,./coverage2.xml # optional todo: add files
+    files: ./test/lcov.info
     flags: unittests, integrationtests
-    name: dart-test-coverage 
+    name: test-coverage 
     verbose: true 

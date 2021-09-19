@@ -20,7 +20,7 @@ task:
   
 test_task:
   name: Running Local Tests
-  only_if: $CIRRUS_BRANCH != 'production'
+  only_if: $CIRRUS_BRANCH != 'production' && $CIRRUS_BRANCH != 'master' 
   depends_on:
     - Analyze and Lint
   pub_cache:
@@ -42,6 +42,20 @@ test_task:
 #  runs ```flutter pub get ``` before running the tests in the test/ folder
 #  runs additional null assertions on the boundaries of migrated and un-migrated code.
   test_script: flutter test --pub --null-assertions
+
+  coverage_task:
+    name: Save Coverage Report
+    env:
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+      USERNAME: ${{ secrets.USERNAME }}
+      EMAIL: ${{ secrets.EMAIL }}
+    only_if: $CIRRUS_BRANCH == 'master'
+    depends_on:
+      - Analyze and Lint
+    pub_cache: ~/.pub-cache
+
+    script: chmod +x ./.ci/coverage.sh ; ./.ci/coverage.sh
+
 
 # # Builds the web app on production branch
 # build_task:
