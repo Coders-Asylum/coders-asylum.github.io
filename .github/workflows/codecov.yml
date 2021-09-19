@@ -1,4 +1,4 @@
-name: Popatlal (Coverage Reporter)
+name: Rita Reporter (Coverage Reporter)
 on:
   push:
     branches: [master]
