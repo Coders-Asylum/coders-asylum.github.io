@@ -4,13 +4,6 @@
 container:
   image: cirrusci/flutter:latest
 
-# runs flutter clean
-# deletes .dart_tool and build folders if present 
-clean_task:
-  name: Running Flutter Clean
-  # runs on all branches expect production
-  only_if: $CIRRUS_BRANCH != 'production'
-  script: flutter clean
 
 # Analyzes and Lints the dart code according to analysis_options.yml
 analyze_task:
