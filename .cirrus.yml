@@ -55,4 +55,5 @@ test_task:
   depends_on:
     - Analyze and Lint
   pub_cache: ~/.pub-cache
-  script: ./.ci/coverage.sh
+  folder: ./.ci/*/**
+  test_script: ./.ci/coverage.sh
