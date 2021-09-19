@@ -7,9 +7,10 @@ git remote set-url origin https://$DEPLOY_TOKEN@github.com/Coders-Asylum/coders-
 git fetch --all
 
 echo "installing curl"
-sudo apt install curl
+sudo apt-get install curl
 
 echo "Creating helper file"
+touch ./test/coverage/coverage_hepler_test.dart
 helper_file  =  test/coverage/coverage_hepler_test.dart
 
 echo "/// Helper file to find coverge make coverage tests for all dart files.\n" > $helper_file
