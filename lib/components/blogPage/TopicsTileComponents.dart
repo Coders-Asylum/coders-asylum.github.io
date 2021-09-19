@@ -111,7 +111,7 @@ class _TopicContainerState extends State<TopicContainer> with SingleTickerProvid
         curve: _curve,
         alignment: Alignment.center,
         margin: EdgeInsets.all(8.0),
-        decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.circular(12.0)),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary, borderRadius: BorderRadius.circular(12.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,

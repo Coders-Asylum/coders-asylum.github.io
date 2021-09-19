@@ -223,7 +223,7 @@ class _IntroTileState extends State<IntroTile> {
                         child: Icon(
                           Icons.arrow_circle_down_rounded,
                           size: 35.0,
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ),
