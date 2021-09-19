@@ -17,8 +17,9 @@ jobs:
       - name: Installing lcov
         run: sudo apt-get install -y lcov  
       
+#       removes reports for auto-generated files
       - name: clean coverage report
-        run: lcov --remove test/coverage/report/lcov.info 
+        run: lcov --remove test/coverage/report/lcov.info 'lib/*/*.g.dart' 'lib/*/*.part.dart' 'lib/generated/*.dart' 'lib/generated/*/*.dart' -o test/coverage/report/lcov.info 
       
       - name: upload to codecov
         uses: codecov/codecov-action@v2.1.0
