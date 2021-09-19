@@ -38,6 +38,6 @@ fi
 curl \
   -X POST \
   -H "Accept: application/vnd.github.v3+json" \
-  -H "Authorization: `Bearer ${COV_POST_TOKEN}`" \
+  -H "Authorization: token ${COV_POST_TOKEN}" \
   https://api.github.com/repos/Coders-Asylum/coders-asylum.github.io/dispatches \
   -d '{"event_type":"coverage_generated"}'
