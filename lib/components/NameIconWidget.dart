@@ -30,9 +30,14 @@ class NameIcon extends StatelessWidget {
       alignment: Alignment.center,
       child: Container(
         alignment: Alignment.center,
-        decoration: BoxDecoration(shape: BoxShape.circle, color: this.backgroundColor, border: Border.all(color: Theme.of(context).accentColor, width: 0.5)),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: this.backgroundColor,
+            border: Border.all(
+                color: Theme.of(context).colorScheme.secondary, width: 0.5)),
         padding: EdgeInsets.all(8.0),
-        child: Text(this.firstLetter, style: TextStyle(fontFamily: 'Gobold', color: this.textColor)),
+        child: Text(this.firstLetter,
+            style: TextStyle(fontFamily: 'Gobold', color: this.textColor)),
       ),
     );
   }

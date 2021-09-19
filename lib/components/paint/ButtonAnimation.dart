@@ -24,14 +24,16 @@ class ButtonAnimationPainter extends CustomPainter {
   /// Returns curtain Rectangle in according to the position in the button.
   Rect _blockRect(int i, Animation<double> translate) {
     final double _blockWidth = this.width / 3;
-    return Rect.fromLTRB(_blockWidth * i, translate.value, _blockWidth * (i + 1) + 0.5, 0.0);
+    return Rect.fromLTRB(
+        _blockWidth * i, translate.value, _blockWidth * (i + 1) + 0.5, 0.0);
 
     //Rect.fromPoints(Offset(_blockWidth * i, this.height), Offset(_blockWidth * (i + 1), translate.value));
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint _blockPaint = Paint()..color = Theme.of(context).accentColor;
+    final Paint _blockPaint = Paint()
+      ..color = Theme.of(context).colorScheme.secondary;
 
     for (int i = 0; i < 3; i++) {
       canvas.drawRect(_blockRect(i, translate[i]), _blockPaint);

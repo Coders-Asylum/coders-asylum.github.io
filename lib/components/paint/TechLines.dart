@@ -12,12 +12,16 @@ class TechnologicalLinesAnimation extends StatefulWidget {
   /// ScrollDirection to trigger the animation.
   final ScrollDirection scrollDirection;
 
-  const TechnologicalLinesAnimation({Key? key, this.scale = 1, required this.scrollDirection}) : super(key: key);
+  const TechnologicalLinesAnimation(
+      {Key? key, this.scale = 1, required this.scrollDirection})
+      : super(key: key);
 
-  _TechnologicalLinesAnimationState createState() => _TechnologicalLinesAnimationState();
+  _TechnologicalLinesAnimationState createState() =>
+      _TechnologicalLinesAnimationState();
 }
 
-class _TechnologicalLinesAnimationState extends State<TechnologicalLinesAnimation> with TickerProviderStateMixin {
+class _TechnologicalLinesAnimationState
+    extends State<TechnologicalLinesAnimation> with TickerProviderStateMixin {
   /// Animation Controller for different nodes.
   late final AnimationController _lineAnimationController1;
   late final AnimationController _lineAnimationController2;
@@ -40,15 +44,23 @@ class _TechnologicalLinesAnimationState extends State<TechnologicalLinesAnimatio
 
   @override
   void initState() {
-    _lineAnimationController1 = AnimationController(vsync: this, duration: Duration(seconds: 1, milliseconds: 200));
-    _lineAnimationController2 = AnimationController(vsync: this, duration: Duration(milliseconds: 900));
-    _lineAnimationController3 = AnimationController(vsync: this, duration: Duration(milliseconds: 600));
-    _circleRadAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _lineAnimationController1 = AnimationController(
+        vsync: this, duration: Duration(seconds: 1, milliseconds: 200));
+    _lineAnimationController2 =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 900));
+    _lineAnimationController3 =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 600));
+    _circleRadAnimationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
 
-    _posOff1 = Tween<double>(begin: 1, end: 7).animate(_lineAnimationController1);
-    _posOff2 = Tween<double>(begin: -6, end: 1).animate(_lineAnimationController2);
-    _posOff3 = Tween<double>(begin: 6, end: -6).animate(_lineAnimationController3);
-    _radTranslate = Tween<double>(begin: 0, end: 4).animate(_circleRadAnimationController);
+    _posOff1 =
+        Tween<double>(begin: 1, end: 7).animate(_lineAnimationController1);
+    _posOff2 =
+        Tween<double>(begin: -6, end: 1).animate(_lineAnimationController2);
+    _posOff3 =
+        Tween<double>(begin: 6, end: -6).animate(_lineAnimationController3);
+    _radTranslate =
+        Tween<double>(begin: 0, end: 4).animate(_circleRadAnimationController);
 
     _lineAnimationController1.repeat(reverse: true);
     _lineAnimationController2.repeat(reverse: true);
@@ -75,7 +87,8 @@ class _TechnologicalLinesAnimationState extends State<TechnologicalLinesAnimatio
         width: 850.0,
         child: CustomPaint(
           size: Size(850, 500),
-          painter: _TechLinesPainter(context, [_posOff1, _posOff2, _posOff3, _radTranslate]),
+          painter: _TechLinesPainter(
+              context, [_posOff1, _posOff2, _posOff3, _radTranslate]),
           isComplex: true,
           willChange: true,
         ),
@@ -117,7 +130,10 @@ class _TechLinesPainter extends CustomPainter {
       ..shader = ui.Gradient.linear(
         _start,
         _end,
-        [Theme.of(context).highlightColor.withOpacity(0.3), Theme.of(context).primaryColor.withOpacity(0.6)],
+        [
+          Theme.of(context).highlightColor.withOpacity(0.3),
+          Theme.of(context).primaryColor.withOpacity(0.6)
+        ],
         [0.4, 1.0],
       );
   }
@@ -128,7 +144,7 @@ class _TechLinesPainter extends CustomPainter {
     List<Paint> _dotPaint = [
       Paint()..color = Theme.of(this.context).highlightColor.withOpacity(0.6),
       Paint()..color = Theme.of(this.context).primaryColor.withOpacity(0.6),
-      Paint()..color = Theme.of(this.context).accentColor
+      Paint()..color = Theme.of(this.context).colorScheme.secondary
     ];
 
     //canvas.drawCircle(center, _rad + this.change[3].value, Paint()..color = Theme.of(context).primaryColor.withOpacity(0.4));
@@ -137,7 +153,8 @@ class _TechLinesPainter extends CustomPainter {
   }
 
   /// Creates a line between the specified points, [point1] and [point2].
-  void _segment(Canvas canvas, Offset point1, Offset point2) => canvas.drawLine(point1, point2, _gradientPaint(point1, point2));
+  void _segment(Canvas canvas, Offset point1, Offset point2) =>
+      canvas.drawLine(point1, point2, _gradientPaint(point1, point2));
 
   @override
   void paint(Canvas canvas, Size size) {

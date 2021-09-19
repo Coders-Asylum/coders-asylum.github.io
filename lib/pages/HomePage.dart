@@ -8,7 +8,8 @@ import 'package:web/components/Button.dart' show Button;
 import 'package:web/components/MenuBar.dart' show MenuBar;
 import 'package:web/components/SideBar.dart' show SideBar;
 import 'package:web/components/paint/CircleMatrix.dart' show CircleMatrix;
-import 'package:web/components/paint/TechLines.dart' show TechnologicalLinesAnimation;
+import 'package:web/components/paint/TechLines.dart'
+    show TechnologicalLinesAnimation;
 
 // Pages.
 import 'package:web/pages/BlogPage.dart' show BlogPage;
@@ -56,7 +57,10 @@ class _HomePageState extends State<HomePage> {
                   Container(),
                 ],
               ),
-              Positioned(top: 0.0, left: 0.0, child: MenuBar(pageController: _pageController)),
+              Positioned(
+                  top: 0.0,
+                  left: 0.0,
+                  child: MenuBar(pageController: _pageController)),
             ],
           ),
         ),
@@ -124,7 +128,8 @@ class _HomeScreenState extends State<_HomeScreen> {
               top: _screenHeight * 0.2796,
               left: _screenWidth * 0.1525,
               child: Container(
-                child: TechnologicalLinesAnimation(scrollDirection: _userScrollDirection),
+                child: TechnologicalLinesAnimation(
+                    scrollDirection: _userScrollDirection),
               ),
             ),
             Scrollbar(
@@ -223,7 +228,7 @@ class _IntroTileState extends State<IntroTile> {
                         child: Icon(
                           Icons.arrow_circle_down_rounded,
                           size: 35.0,
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ),
@@ -260,19 +265,26 @@ class _IntroTileState extends State<IntroTile> {
                 // CA tree Image
                 Positioned(
                   top: 0.0083 * _kHeight,
-                  left: _screenWidth >= _kWidth ? (_screenWidth - _kWidth) + 0.5125 * _kWidth : 768.0,
+                  left: _screenWidth >= _kWidth
+                      ? (_screenWidth - _kWidth) + 0.5125 * _kWidth
+                      : 768.0,
                   child: Container(
                     height: _kHeight * 0.744,
                     width: _kWidth * 0.423,
                     decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage('lib/assets/res/ca_tree.png'), alignment: Alignment.center, fit: BoxFit.contain),
+                      image: DecorationImage(
+                          image: AssetImage('lib/assets/res/ca_tree.png'),
+                          alignment: Alignment.center,
+                          fit: BoxFit.contain),
                     ),
                   ),
                 ),
                 //CA title Placeholder
                 Positioned(
                   top: 0.2161 * _kHeight,
-                  left: _screenWidth >= _kWidth ? (_screenWidth - _kWidth) + 0.1229 * _kWidth : 117,
+                  left: _screenWidth >= _kWidth
+                      ? (_screenWidth - _kWidth) + 0.1229 * _kWidth
+                      : 117,
                   child: Container(
                     width: _kWidth * 0.5208,
                     height: _kHeight * 0.3955,
@@ -289,7 +301,10 @@ class _IntroTileState extends State<IntroTile> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'welcome to',
-                              style: TextStyle(fontFamily: 'Source Code', fontWeight: FontWeight.w300, color: Theme.of(context).highlightColor),
+                              style: TextStyle(
+                                  fontFamily: 'Source Code',
+                                  fontWeight: FontWeight.w300,
+                                  color: Theme.of(context).highlightColor),
                             ),
                           ),
                         ),
@@ -302,7 +317,10 @@ class _IntroTileState extends State<IntroTile> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'CODERS',
-                              style: TextStyle(fontFamily: 'Gobold', color: Theme.of(context).primaryColor, letterSpacing: 2.0),
+                              style: TextStyle(
+                                  fontFamily: 'Gobold',
+                                  color: Theme.of(context).primaryColor,
+                                  letterSpacing: 2.0),
                             ),
                           ),
                         ),
@@ -315,7 +333,9 @@ class _IntroTileState extends State<IntroTile> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'ASYLUM',
-                              style: TextStyle(fontFamily: 'Orbitron', color: Theme.of(context).primaryColor),
+                              style: TextStyle(
+                                  fontFamily: 'Orbitron',
+                                  color: Theme.of(context).primaryColor),
                             ),
                           ),
                         ),

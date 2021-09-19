@@ -25,8 +25,12 @@ class _MenuBarState extends State<MenuBar> {
   /// This should have the same sequence as the sequence of the page that it is intended to navigate to.
   static const List<MenuTab> _tabs = [
     MenuTab(title: 'Home', tabIcon: Icons.home_rounded),
-    MenuTab(title: 'Flutter 101', imageIcon: AssetImage('lib/assets/res/flutterio-icon.png')),
-    MenuTab(title: 'Python 101', imageIcon: AssetImage('lib/assets/res/python-icon.png')),
+    MenuTab(
+        title: 'Flutter 101',
+        imageIcon: AssetImage('lib/assets/res/flutterio-icon.png')),
+    MenuTab(
+        title: 'Python 101',
+        imageIcon: AssetImage('lib/assets/res/python-icon.png')),
     MenuTab(title: 'Blog', tabIcon: Icons.book_rounded),
     MenuTab(title: 'Tutorials', tabIcon: Icons.code_rounded),
   ];
@@ -64,8 +68,16 @@ class _MenuBarState extends State<MenuBar> {
                   fit: BoxFit.fitHeight,
                   child: RichText(
                       text: TextSpan(children: <TextSpan>[
-                    TextSpan(text: 'CODERS', style: TextStyle(fontFamily: 'Gobold', color: Theme.of(context).primaryColor)),
-                    TextSpan(text: ' ASYLUM', style: TextStyle(fontFamily: 'Orbitron', color: Theme.of(context).primaryColor)),
+                    TextSpan(
+                        text: 'CODERS',
+                        style: TextStyle(
+                            fontFamily: 'Gobold',
+                            color: Theme.of(context).primaryColor)),
+                    TextSpan(
+                        text: ' ASYLUM',
+                        style: TextStyle(
+                            fontFamily: 'Orbitron',
+                            color: Theme.of(context).primaryColor)),
                   ])),
                 ),
               ),
@@ -74,7 +86,12 @@ class _MenuBarState extends State<MenuBar> {
             Container(
               height: _menuBarHeight,
               width: _tabs.length * (_tabWidth + 16),
-              child: MenuItems(tabs: _tabs, tabHeight: _tabHeight, tabWidth: _tabWidth, pageController: widget.pageController, currentPage: (page) => _currentPage = page),
+              child: MenuItems(
+                  tabs: _tabs,
+                  tabHeight: _tabHeight,
+                  tabWidth: _tabWidth,
+                  pageController: widget.pageController,
+                  currentPage: (page) => _currentPage = page),
             ),
           ],
         ),
@@ -105,7 +122,14 @@ class MenuItems extends StatefulWidget {
   ///
   final CurrentPage currentPage;
 
-  const MenuItems({Key? key, required this.tabs, this.tabHeight = 30.0, this.tabWidth = 100.0, required this.pageController, required this.currentPage}) : super(key: key);
+  const MenuItems(
+      {Key? key,
+      required this.tabs,
+      this.tabHeight = 30.0,
+      this.tabWidth = 100.0,
+      required this.pageController,
+      required this.currentPage})
+      : super(key: key);
 
   _MenuItemsState createState() => _MenuItemsState();
 }
@@ -136,7 +160,7 @@ class _MenuItemsState extends State<MenuItems> {
   /// Sets Text color according on Mouse Hover events.
   Color _tabItemColor(int i) {
     if (i == _currentTabIndex) {
-      return Theme.of(context).accentColor;
+      return Theme.of(context).colorScheme.secondary;
     } else if (_hover && i == _hoverTabIndex) {
       return Theme.of(context).primaryColor;
     } else {
@@ -191,8 +215,14 @@ class _MenuItemsState extends State<MenuItems> {
                         child: FittedBox(
                           fit: BoxFit.fitHeight,
                           child: widget.tabs[i].imageIcon == null
-                              ? Icon(widget.tabs[i].tabIcon, color: Theme.of(context).accentColor, size: 20.0)
-                              : ImageIcon(widget.tabs[i].imageIcon, size: 16.0, color: Theme.of(context).accentColor),
+                              ? Icon(widget.tabs[i].tabIcon,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  size: 20.0)
+                              : ImageIcon(widget.tabs[i].imageIcon,
+                                  size: 16.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
                         )),
                     Padding(
                       padding: EdgeInsets.only(left: _off / 2),
@@ -203,7 +233,8 @@ class _MenuItemsState extends State<MenuItems> {
                           onPressed: () {
                             setState(() {
                               _currentTabIndex = i;
-                              widget.pageController.jumpToPage(_currentTabIndex);
+                              widget.pageController
+                                  .jumpToPage(_currentTabIndex);
                               widget.currentPage(i);
                             });
                           },
@@ -230,14 +261,17 @@ class _MenuItemsState extends State<MenuItems> {
         ),
         // moving bar
         AnimatedPositioned(
-          left: (widget.tabWidth * _currentTabIndex) + (_currentTabIndex == 0 ? _off / 2 : (1 / 2 + _currentTabIndex) * _off),
+          left: (widget.tabWidth * _currentTabIndex) +
+              (_currentTabIndex == 0
+                  ? _off / 2
+                  : (1 / 2 + _currentTabIndex) * _off),
           top: widget.tabHeight + 14.0,
           duration: Duration(milliseconds: 200),
           child: Container(
             height: 3.0,
             width: widget.tabWidth,
             decoration: BoxDecoration(
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(5.0),
             ),
           ),
@@ -260,5 +294,7 @@ class MenuTab {
   /// Icon that is added to the leading of menu name.
   final IconData? tabIcon;
 
-  const MenuTab({this.imageIcon, this.tabIcon, required this.title}) : assert((imageIcon != null || tabIcon != null), ' Any one of the Icon should be provided');
+  const MenuTab({this.imageIcon, this.tabIcon, required this.title})
+      : assert((imageIcon != null || tabIcon != null),
+            ' Any one of the Icon should be provided');
 }
