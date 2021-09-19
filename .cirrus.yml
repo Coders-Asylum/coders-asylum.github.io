@@ -14,7 +14,7 @@ clean_task:
 
 # Analyzes and Lints the dart code according to analysis_options.yml
 analyze_task:
-  name: Analyze
+  name: Analyze and Lint
   script: flutter analyze
 
   
