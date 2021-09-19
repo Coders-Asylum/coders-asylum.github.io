@@ -7,7 +7,7 @@ on:
     
 jobs:
   upload_coverage:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     continue-on-error: true
     
     steps:
