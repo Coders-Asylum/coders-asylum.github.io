@@ -28,8 +28,7 @@ class Topic {
     required this.noOfPosts,
     this.description = 'start learning',
   })  : assert(noOfPosts > 0, 'Number of posts should be at least 1'),
-        assert(icon == null || text == null,
-            'Only one of the two can be specified');
+        assert(icon == null || text == null, 'Only one of the two can be specified');
 
   @override
   String toString() {
@@ -63,19 +62,13 @@ class TopicContainer extends StatefulWidget {
   /// This should be in between 0.1 and 1.0.
   final double growth;
 
-  const TopicContainer(this.topic,
-      {this.screenSize = Size.zero,
-      required this.height,
-      required this.width,
-      this.growth = 0.5})
-      : assert(growth >= 0.1 && growth <= 1.0,
-            'growth is percentage growth and should be between 0.1 and 1.0');
+  const TopicContainer(this.topic, {this.screenSize = Size.zero, required this.height, required this.width, this.growth = 0.5})
+      : assert(growth >= 0.1 && growth <= 1.0, 'growth is percentage growth and should be between 0.1 and 1.0');
 
   _TopicContainerState createState() => _TopicContainerState();
 }
 
-class _TopicContainerState extends State<TopicContainer>
-    with SingleTickerProviderStateMixin {
+class _TopicContainerState extends State<TopicContainer> with SingleTickerProviderStateMixin {
   /// Animation duration in milliseconds.
   static const int _milliseconds = 200;
 
@@ -118,9 +111,7 @@ class _TopicContainerState extends State<TopicContainer>
         curve: _curve,
         alignment: Alignment.center,
         margin: EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.circular(12.0)),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary, borderRadius: BorderRadius.circular(12.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,17 +120,13 @@ class _TopicContainerState extends State<TopicContainer>
               height: widget.height,
               width: widget.width,
               padding: EdgeInsets.all(8.0),
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
               child: widget.topic.text == null
                   ? Image(image: widget.topic.icon!, fit: BoxFit.contain)
                   : FittedBox(
                       fit: BoxFit.contain,
                       alignment: Alignment.center,
-                      child: Text(widget.topic.text!.toUpperCase(),
-                          style: TextStyle(
-                              fontFamily: 'Gobold',
-                              color: Theme.of(context).primaryColor)),
+                      child: Text(widget.topic.text!.toUpperCase(), style: TextStyle(fontFamily: 'Gobold', color: Theme.of(context).primaryColor)),
                     ),
             ),
             Visibility(
@@ -149,16 +136,12 @@ class _TopicContainerState extends State<TopicContainer>
               child: FittedBox(
                 fit: BoxFit.fitHeight,
                 child: AnimatedContainer(
-                  duration: Duration(
-                      milliseconds:
-                          _visible ? _milliseconds * 3 : _milliseconds - 50),
+                  duration: Duration(milliseconds: _visible ? _milliseconds * 3 : _milliseconds - 50),
                   curve: _curve,
                   height: _visible ? _height * 0.25 : 0.0,
                   width: _width,
                   clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(12.0)),
+                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.3), borderRadius: BorderRadius.circular(12.0)),
                   padding: EdgeInsets.all(_visible ? 8.0 : 0.0),
                   margin: EdgeInsets.all(_visible ? 8.0 : 0.0),
                   child: RichText(
@@ -168,18 +151,8 @@ class _TopicContainerState extends State<TopicContainer>
                     text: TextSpan(
                       mouseCursor: SystemMouseCursors.text,
                       children: <TextSpan>[
-                        TextSpan(
-                            text: "${widget.topic.name}\n",
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                fontFamily: 'Gobold',
-                                color: Theme.of(context).primaryColor)),
-                        TextSpan(
-                            text: widget.topic.description,
-                            style: TextStyle(
-                                fontSize: 14.0,
-                                fontFamily: 'Source Code',
-                                color: Theme.of(context).highlightColor)),
+                        TextSpan(text: "${widget.topic.name}\n", style: TextStyle(fontSize: 20.0, fontFamily: 'Gobold', color: Theme.of(context).primaryColor)),
+                        TextSpan(text: widget.topic.description, style: TextStyle(fontSize: 14.0, fontFamily: 'Source Code', color: Theme.of(context).highlightColor)),
                       ],
                     ),
                   ),

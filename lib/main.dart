@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter 101',
       debugShowCheckedModeBanner: false,
-      theme: appTheme.copyWith(
-          colorScheme:
-              appTheme.colorScheme.copyWith(secondary: Color(0xff1366C8))),
+      theme: appTheme.copyWith(colorScheme: appTheme.colorScheme.copyWith(secondary: Color(0xff1366C8))),
       home: HomePage(),
     );
   }

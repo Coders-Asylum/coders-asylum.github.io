@@ -15,8 +15,7 @@ class FeaturedPost {
   final String imageUrl;
   final String? author;
 
-  const FeaturedPost(
-      this.title, this.topics, this.tags, this.imageUrl, this.author);
+  const FeaturedPost(this.title, this.topics, this.tags, this.imageUrl, this.author);
 
   @override
   String toString() {
@@ -33,11 +32,9 @@ class FeaturedPostTileNavDots extends StatefulWidget {
 
   final int totalPosts;
 
-  const FeaturedPostTileNavDots(
-      {required this.currentIndex, required this.totalPosts});
+  const FeaturedPostTileNavDots({required this.currentIndex, required this.totalPosts});
 
-  _FeaturedPostTileNavDotsState createState() =>
-      _FeaturedPostTileNavDotsState();
+  _FeaturedPostTileNavDotsState createState() => _FeaturedPostTileNavDotsState();
 }
 
 class _FeaturedPostTileNavDotsState extends State<FeaturedPostTileNavDots> {
@@ -67,19 +64,11 @@ class _FeaturedPostTileNavDotsState extends State<FeaturedPostTileNavDots> {
           itemBuilder: (BuildContext context, int i) => Container(
             height: i == widget.currentIndex ? _dia + _change : _dia,
             width: i == widget.currentIndex ? _dia + _change : _dia,
-            margin: i == widget.currentIndex
-                ? EdgeInsets.fromLTRB(_margin, 0.0, _margin, 0.0)
-                : EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            margin: i == widget.currentIndex ? EdgeInsets.fromLTRB(_margin, 0.0, _margin, 0.0) : EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
             decoration: BoxDecoration(
-              color: i == widget.currentIndex
-                  ? Colors.black.withOpacity(0.8)
-                  : Colors.transparent,
+              color: i == widget.currentIndex ? Colors.black.withOpacity(0.8) : Colors.transparent,
               shape: BoxShape.circle,
-              border: Border.all(
-                  color: i == widget.currentIndex
-                      ? Colors.transparent
-                      : Colors.black,
-                  width: 1.5),
+              border: Border.all(color: i == widget.currentIndex ? Colors.transparent : Colors.black, width: 1.5),
             ),
             child: Semantics(label: 'dot $i'),
           ),
@@ -107,15 +96,9 @@ class FeaturedPostTileNavButton extends StatefulWidget {
   final ScrollController scrollController;
   final FeaturePostScrollFunction scrollFunction;
 
-  const FeaturedPostTileNavButton(
-      {Key? key,
-      required this.scrollController,
-      this.direction = NavDirection.forward,
-      required this.scrollFunction})
-      : super(key: key);
+  const FeaturedPostTileNavButton({Key? key, required this.scrollController, this.direction = NavDirection.forward, required this.scrollFunction}) : super(key: key);
 
-  _FeaturedPostTileNavButtonState createState() =>
-      _FeaturedPostTileNavButtonState();
+  _FeaturedPostTileNavButtonState createState() => _FeaturedPostTileNavButtonState();
 }
 
 class _FeaturedPostTileNavButtonState extends State<FeaturedPostTileNavButton> {
@@ -157,10 +140,7 @@ class _FeaturedPostTileNavButtonState extends State<FeaturedPostTileNavButton> {
                 icon: Icon(
                   Icons.arrow_back_ios_rounded,
                   // size: _rad - (_pad * 2),
-                  color: Theme.of(context)
-                      .colorScheme
-                      .secondary
-                      .withOpacity(_hover ? 0.8 : 0.3),
+                  color: Theme.of(context).colorScheme.secondary.withOpacity(_hover ? 0.8 : 0.3),
                 ),
                 onPressed: () => widget.scrollFunction(widget.direction),
               ),
@@ -198,9 +178,7 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
   final double _width = 425.0;
 
   /// The author name from the featured post.
-  String get author => widget.featuredPost.author == null
-      ? 'Anonymus Hacker'
-      : widget.featuredPost.author!;
+  String get author => widget.featuredPost.author == null ? 'Anonymus Hacker' : widget.featuredPost.author!;
 
   /// The title of the featured post.
   String get title => widget.featuredPost.title;
@@ -235,11 +213,7 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(_featuredTileCornerRadius),
         border: Border.all(color: Colors.black.withOpacity(0.45), width: 1.0),
-        gradient: LinearGradient(
-            colors: [Colors.black26, Colors.black.withOpacity(0.1)],
-            stops: [0.0, 1.0],
-            begin: Alignment(-1.0, -1.0),
-            end: Alignment(1.0, 1.0)),
+        gradient: LinearGradient(colors: [Colors.black26, Colors.black.withOpacity(0.1)], stops: [0.0, 1.0], begin: Alignment(-1.0, -1.0), end: Alignment(1.0, 1.0)),
       ),
       child: BackdropFilter(
         filter: ui.ImageFilter.blur(sigmaX: _blur, sigmaY: _blur),
@@ -259,10 +233,7 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
                 child: Text(
                   topics,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontFamily: 'Source Code',
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w300),
+                  style: TextStyle(fontFamily: 'Source Code', color: Theme.of(context).primaryColor, fontWeight: FontWeight.w300),
                 ),
               ),
             ),
@@ -271,9 +242,7 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
                 height: _height * 0.008,
                 width: _width - (_width * 0.30),
                 margin: EdgeInsets.all(5.0),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(3.0))),
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary, borderRadius: BorderRadius.circular(3.0))),
             // title place holder.
             Container(
               width: _width,
@@ -286,12 +255,7 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
                 softWrap: true,
                 textAlign: TextAlign.left,
                 semanticsLabel: 'featuredPostTitle',
-                style: TextStyle(
-                    wordSpacing: 3.0,
-                    fontSize: 24.0,
-                    fontFamily: 'Gobold',
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300),
+                style: TextStyle(wordSpacing: 3.0, fontSize: 24.0, fontFamily: 'Gobold', color: Colors.white, fontWeight: FontWeight.w300),
               ),
             ),
             // Author container
@@ -309,22 +273,13 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
                     width: _height * 0.15,
                     padding: EdgeInsets.all(5.0),
                     alignment: Alignment.center,
-                    child: NameIcon(
-                        name: author,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
-                        textColor: Colors.white),
+                    child: NameIcon(name: author, backgroundColor: Theme.of(context).colorScheme.secondary, textColor: Colors.white),
                   ),
                   Container(
                       height: _height * 0.15,
                       width: _width - _height * 0.15 - 20,
                       alignment: Alignment.centerLeft,
-                      child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(author,
-                              style: TextStyle(
-                                  fontFamily: 'Source Sans',
-                                  color: Theme.of(context).primaryColor)))),
+                      child: FittedBox(fit: BoxFit.contain, child: Text(author, style: TextStyle(fontFamily: 'Source Sans', color: Theme.of(context).primaryColor)))),
                 ],
               ),
             ),
@@ -335,13 +290,7 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
               width: _width,
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 0.0),
-              child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: Text(tags,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontFamily: 'Sorce Code',
-                          color: Theme.of(context).highlightColor))),
+              child: FittedBox(fit: BoxFit.contain, child: Text(tags, textAlign: TextAlign.left, style: TextStyle(fontFamily: 'Sorce Code', color: Theme.of(context).highlightColor))),
             ),
           ],
         ),
