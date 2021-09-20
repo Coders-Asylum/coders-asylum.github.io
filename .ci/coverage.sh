@@ -12,11 +12,11 @@ if [[ ! -e ./test/coverage/coverage_hepler_test.dart ]]; then
     touch ./test/coverage/coverage_hepler_test.dart
 fi
 helper_file=./test/coverage/coverage_hepler_test.dart
-> helper_file
+ true > helper_file
 
 printf "/// Helper file to find coverge make coverage tests for all dart files.\n" >> $helper_file
 printf "/// This file is created during every CI operation automaticaly, it is safe to delete.\n\n" >> $helper_file
-printf "//ignore_for_file: unused_import" >> $helper_file
+printf "//ignore_for_file: unused_import\n" >> $helper_file
 
 #  These lines find all the .dart file used in the project and adds them into the import lines with the package name.
 #  This ignores the .dart files created by flutter
