@@ -13,7 +13,7 @@ analyze_task:
   
 test_task:
   name: Running Local Tests
-  only_if: $CIRRUS_BRANCH != 'production' && $CIRRUS_BRANCH != 'master'
+  only_if: $CIRRUS_BRANCH != 'production'
   depends_on:
     - Analyze and Lint
   pub_cache:
@@ -39,7 +39,7 @@ test_task:
 # The coverage report is saved under test/coverage/report in lcov.info file.
 test_task:
   name: Running Tests and saving coverage report.
-  only_if: $CIRRUS_BRANCH == 'master'
+  only_if: $CIRRUS_BRANCH == 'master' && $CIRRUS_PR != ''
   depends_on:
     - Analyze and Lint
   pub_cache: 
