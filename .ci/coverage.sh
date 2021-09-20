@@ -1,11 +1,11 @@
 #! /bin/sh
-
 echo "setting git configurations for commit."
-git config --global user.email $EMAIL
-git config --global user.name $USERNAME
-git remote set-url origin https://$DEPLOY_TOKEN@github.com/Coders-Asylum/coders-asylum.github.io.git
+git config --global user.email "${EMAIL}"
+git config --global user.name "${USERNAME}"
+git remote set-url origin "https://${DEPLOY_TOKEN}@github.com/Coders-Asylum/coders-asylum.github.io.git"
 git fetch --all
 
+# creating the helper file.
 touch test/coverage/coverage_hepler_test.dart
 helper_file=test/coverage/coverage_hepler_test.dart
 >helper_file
@@ -22,19 +22,22 @@ echo "\nvoid main(){}" >> $helper_file
 
 flutter test --pub --null-assertions --coverage --coverage-path "test/coverage/report/lcov.info"
 
-# check if changes are present in the current working branch
-if ! git --git-dir="./.git" diff --quiet
+# Runs only if PR has triggered the CI
+if [ -n "$CIRRUS_PR" ]; 
 then
-  git add --all
-  git commit --all -m "Coverage report generated on:$(date)"
-  git push origin
-  echo "Changes have been committed and pushed to origin"
+  # check if changes are present in the current working branch
+  if ! git --git-dir="./.git" diff --quiet
+  then
+    git add --all
+    git commit --all -m "Coverage report generated on:$(date)"
+    git push origin
+    echo "Changes have been committed and pushed to origin"
+  fi
 fi
 
 # This sends a dispatch event
-curl \
-  -X POST \
-  -H "Accept: application/vnd.github.v3+json" \
-  -H "Authorization: `Bearer ${COV_POST_TOKEN}`"
-  https://api.github.com/repos/Coders-Asylum/coders-asylum.github.io/dispatches \
-  -d '{"event_type":"coverage_generated"}'
+curl --location --request POST 'https://api.github.com/repos/Coders-Asylum/coders-asylum.github.io/dispatches' \
+--header 'Accept: application/vnd.github.v3+json' \
+--header 'Content-Type: application/json' \
+--header "Authorization: Bearer $COV_POST_TOKEN" \
+--data-raw '{"event_type": "coverage_generated"}'
