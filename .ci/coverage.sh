@@ -1,9 +1,10 @@
 #! /bin/sh
 
 echo "setting git configurations for commit."
-git config --global user.email $EMAIL
-git config --global user.name $USERNAME
-git remote set-url origin https://$DEPLOY_TOKEN@github.com/Coders-Asylum/coders-asylum.github.io.git
+git config --global user.email "${EMAIL}"
+git config --global user.name "${USERNAME}"
+echo "${USERNAME}"
+git remote set-url origin "https://${DEPLOY_TOKEN}@github.com/Coders-Asylum/coders-asylum.github.io.git"
 git fetch --all
 
 echo "installing curl"
