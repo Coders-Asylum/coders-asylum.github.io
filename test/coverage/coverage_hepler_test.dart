@@ -18,4 +18,4 @@ import 'package:web/components/NameIconWidget.dart';
 import 'package:web/components/blogPage/FeaturedPostTileComponents.dart';
 import 'package:web/components/blogPage/TopicsTileComponents.dart';
 
-void main(){}
+void main() {}
