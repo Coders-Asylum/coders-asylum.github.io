@@ -39,7 +39,7 @@ test_task:
 # The coverage report is saved under test/coverage/report in lcov.info file.
 test_task:
   name: Running Tests and saving coverage report.
-  only_if: $CIRRUS_BRANCH == 'master' && $CIRRUS_PR != ''
+  only_if: "$CIRRUS_BRANCH == 'master' && $CIRRUS_PR != ''"
   depends_on:
     - Analyze and Lint
   pub_cache: 
