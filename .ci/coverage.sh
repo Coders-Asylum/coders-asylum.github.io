@@ -11,7 +11,7 @@ sudo apt-get install curl
 
 echo "Creating helper file"
 touch test/coverage/coverage_hepler_test.dart
-helper_file  =  "./test/coverage/coverage_hepler_test.dart"
+helper_file=test/coverage/coverage_hepler_test.dart
 
 echo "/// Helper file to find coverge make coverage tests for all dart files.\n" > $helper_file
 echo "/// This file is created during every CI operation automaticaly, it is safe to delete.\n" > $helper_file
