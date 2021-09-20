@@ -26,13 +26,17 @@ echo "\nvoid main(){}" >> $helper_file
 
 flutter test --pub --null-assertions --coverage --coverage-path "test/coverage/report/lcov.info"
 
-# check if changes are present in the current working branch
-if ! git --git-dir="./.git" diff --quiet
+# Runs only if PR has triggered the CI
+if [ -n "$CIRRUS_PR" ]; 
 then
-  git add --all
-  git commit --all -m "Coverage report generated on:$(date)"
-  git push origin
-  echo "Changes have been committed and pushed to origin"
+  # check if changes are present in the current working branch
+  if ! git --git-dir="./.git" diff --quiet
+  then
+    git add --all
+    git commit --all -m "Coverage report generated on:$(date)"
+    git push origin
+    echo "Changes have been committed and pushed to origin"
+  fi
 fi
 
 # This sends a dispatch event
