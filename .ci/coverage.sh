@@ -1,5 +1,6 @@
 #! /bin/sh
-echo "setting git configurations for commit."
+
+# Setting up git config values
 git config --global user.email "${EMAIL}"
 git config --global user.name "${USERNAME}"
 git remote set-url origin "https://${DEPLOY_TOKEN}@github.com/Coders-Asylum/coders-asylum.github.io.git"
