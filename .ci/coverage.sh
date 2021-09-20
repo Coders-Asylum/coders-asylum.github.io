@@ -1,6 +1,6 @@
 #! /bin/sh
 
-mkdir -p ./test/coverage/
+mkdir -p ./test/coverage/report/
 touch ./test/coverage/coverage_hepler_test.dart
 helper_file=./test/coverage/coverage_hepler_test.dart
 
