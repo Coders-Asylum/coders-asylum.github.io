@@ -3,7 +3,7 @@
 echo "setting git configurations for commit."
 git config --global user.email "${EMAIL}"
 git config --global user.name "${USERNAME}"
-echo "${USERNAME}"
+echo $USERNAME
 git remote set-url origin "https://${DEPLOY_TOKEN}@github.com/Coders-Asylum/coders-asylum.github.io.git"
 git fetch --all
 
@@ -36,11 +36,8 @@ then
 fi
 
 # This sends a dispatch event
-curl --location --request POST 'https://api.github.com/repos/Coders-Asylum/coders-asylum.github.io/dispatches
-' \
+curl --location --request POST 'https://api.github.com/repos/Coders-Asylum/coders-asylum.github.io/dispatches' \
 --header 'Accept: application/vnd.github.v3+json' \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $COV_POST_TOKEN" \
---data-raw '{
-    "event_type": "coverage_generated"
-}'
+--data-raw '{"event_type": "coverage_generated"}'
