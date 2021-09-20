@@ -39,11 +39,6 @@ test_task:
 # The coverage report is saved under test/coverage/report in lcov.info file.
 test_task:
   name: Running Tests and saving coverage report.
-  env:
-    DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-    USERNAME: ${{ secrets.USERNAME }}
-    EMAIL: ${{ secrets.EMAIL }}
-    COV_POST_TOKEN: ${{ secrets.COV_POST_KEY }}
   only_if: $CIRRUS_BRANCH == 'master'
   depends_on:
     - Analyze and Lint
