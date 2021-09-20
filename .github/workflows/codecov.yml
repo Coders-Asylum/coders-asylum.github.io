@@ -1,19 +1,25 @@
 name: Rita Reporter (Coverage Reporter)
 on:
-  repository_dispatch:
-    types: [coverage_generated]
+  push:
+    branch: [master]
     
 jobs:
   upload_coverage:
     runs-on: ubuntu-latest
     continue-on-error: true
+    container:
+      image: cirrusci/flutter:latest
     
     steps:
       - name: Clone repository
         uses: actions/checkout@v2
         
       - name: Installing lcov
-        run: sudo apt-get install -y lcov  
+        run: sudo apt-get install -y lcov
+
+
+      - name: Generate Coverage report
+        run: chmod +x ./.ci/coverage.sh ; sh ./.ci/coverage.sh
       
 #       removes reports for auto-generated files
       - name: clean coverage report

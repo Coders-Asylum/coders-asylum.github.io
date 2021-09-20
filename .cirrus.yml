@@ -34,15 +34,3 @@ test_task:
 #  runs additional null assertions on the boundaries of migrated and un-migrated code.
   test_script: flutter test --null-assertions
 
-
-# This test runs with generating the coverge report, with null assertions
-# The coverage report is saved under test/coverage/report in lcov.info file.
-test_task:
-  name: Running Tests and saving coverage report.
-  skip: "changesInclude('test/coverage/coverage_helper_test.dart')"
-  only_if: $CIRRUS_BRANCH == 'master'
-  depends_on:
-    - Analyze and Lint
-  pub_cache: 
-    folder: ~/.pub-cache
-  test_script: chmod +x ./.ci/coverage.sh ; sh ./.ci/coverage.sh 
