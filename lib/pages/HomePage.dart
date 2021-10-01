@@ -9,6 +9,7 @@ import 'package:web/components/MenuBar.dart' show MenuBar;
 import 'package:web/components/SideBar.dart' show SideBar;
 import 'package:web/components/paint/CircleMatrix.dart' show CircleMatrix;
 import 'package:web/components/paint/TechLines.dart' show TechnologicalLinesAnimation;
+import 'package:web/components/Lightbox.dart' show LightBox;
 
 // Pages.
 import 'package:web/pages/BlogPage.dart' show BlogPage;
@@ -23,6 +24,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    LightBox.show(context,
+        title: "Work In Progress",
+        path: './lib/assets/res/animated/cat_working_hard.gif',
+        content: "This project is under construction, you will find most of the things not working.\nYou can contribute or get updates on the Github.");
     _pageController = PageController(initialPage: 0);
     super.initState();
   }
@@ -223,7 +228,7 @@ class _IntroTileState extends State<IntroTile> {
                         child: Icon(
                           Icons.arrow_circle_down_rounded,
                           size: 35.0,
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ),

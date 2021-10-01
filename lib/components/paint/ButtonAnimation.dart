@@ -31,7 +31,7 @@ class ButtonAnimationPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint _blockPaint = Paint()..color = Theme.of(context).accentColor;
+    final Paint _blockPaint = Paint()..color = Theme.of(context).colorScheme.secondary;
 
     for (int i = 0; i < 3; i++) {
       canvas.drawRect(_blockRect(i, translate[i]), _blockPaint);

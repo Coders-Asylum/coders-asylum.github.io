@@ -1,0 +1,35 @@
+name: Rita Reporter (Coverage Reporter)
+on:
+  push:
+    branches: [master]
+    
+jobs:
+  upload_coverage:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    container:
+      image: cirrusci/flutter:latest
+    
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+        
+      - name: Installing lcov
+        run: sudo apt-get install -y lcov
+
+
+      - name: Generate Coverage report
+        run: chmod +x ./.ci/coverage.sh ; sh ./.ci/coverage.sh
+      
+#       removes reports for auto-generated files
+      - name: clean coverage report
+        run: lcov --remove test/coverage/report/lcov.info 'lib/*/*.g.dart' 'lib/*/*.part.dart' 'lib/generated/*.dart' 'lib/generated/*/*.dart' -o test/coverage/report/lcov.info 
+      
+      - name: upload to codecov
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./test/coverage/report/lcov.info 
+          flags: unittests, integrationtests
+          name: test-coverage 
+          verbose: true 

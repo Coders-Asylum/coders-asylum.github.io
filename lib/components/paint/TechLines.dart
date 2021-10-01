@@ -128,7 +128,7 @@ class _TechLinesPainter extends CustomPainter {
     List<Paint> _dotPaint = [
       Paint()..color = Theme.of(this.context).highlightColor.withOpacity(0.6),
       Paint()..color = Theme.of(this.context).primaryColor.withOpacity(0.6),
-      Paint()..color = Theme.of(this.context).accentColor
+      Paint()..color = Theme.of(this.context).colorScheme.secondary
     ];
 
     //canvas.drawCircle(center, _rad + this.change[3].value, Paint()..color = Theme.of(context).primaryColor.withOpacity(0.4));

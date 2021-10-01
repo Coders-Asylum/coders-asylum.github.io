@@ -140,7 +140,7 @@ class _FeaturedPostTileNavButtonState extends State<FeaturedPostTileNavButton> {
                 icon: Icon(
                   Icons.arrow_back_ios_rounded,
                   // size: _rad - (_pad * 2),
-                  color: Theme.of(context).accentColor.withOpacity(_hover ? 0.8 : 0.3),
+                  color: Theme.of(context).colorScheme.secondary.withOpacity(_hover ? 0.8 : 0.3),
                 ),
                 onPressed: () => widget.scrollFunction(widget.direction),
               ),
@@ -242,7 +242,7 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
                 height: _height * 0.008,
                 width: _width - (_width * 0.30),
                 margin: EdgeInsets.all(5.0),
-                decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.circular(3.0))),
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary, borderRadius: BorderRadius.circular(3.0))),
             // title place holder.
             Container(
               width: _width,
@@ -273,7 +273,7 @@ class FeaturedPostInfoState extends State<FeaturedPostInfo> {
                     width: _height * 0.15,
                     padding: EdgeInsets.all(5.0),
                     alignment: Alignment.center,
-                    child: NameIcon(name: author, backgroundColor: Theme.of(context).accentColor, textColor: Colors.white),
+                    child: NameIcon(name: author, backgroundColor: Theme.of(context).colorScheme.secondary, textColor: Colors.white),
                   ),
                   Container(
                       height: _height * 0.15,

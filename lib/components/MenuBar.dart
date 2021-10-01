@@ -136,7 +136,7 @@ class _MenuItemsState extends State<MenuItems> {
   /// Sets Text color according on Mouse Hover events.
   Color _tabItemColor(int i) {
     if (i == _currentTabIndex) {
-      return Theme.of(context).accentColor;
+      return Theme.of(context).colorScheme.secondary;
     } else if (_hover && i == _hoverTabIndex) {
       return Theme.of(context).primaryColor;
     } else {
@@ -191,8 +191,8 @@ class _MenuItemsState extends State<MenuItems> {
                         child: FittedBox(
                           fit: BoxFit.fitHeight,
                           child: widget.tabs[i].imageIcon == null
-                              ? Icon(widget.tabs[i].tabIcon, color: Theme.of(context).accentColor, size: 20.0)
-                              : ImageIcon(widget.tabs[i].imageIcon, size: 16.0, color: Theme.of(context).accentColor),
+                              ? Icon(widget.tabs[i].tabIcon, color: Theme.of(context).colorScheme.secondary, size: 20.0)
+                              : ImageIcon(widget.tabs[i].imageIcon, size: 16.0, color: Theme.of(context).colorScheme.secondary),
                         )),
                     Padding(
                       padding: EdgeInsets.only(left: _off / 2),
@@ -237,7 +237,7 @@ class _MenuItemsState extends State<MenuItems> {
             height: 3.0,
             width: widget.tabWidth,
             decoration: BoxDecoration(
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(5.0),
             ),
           ),
