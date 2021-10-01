@@ -28,6 +28,9 @@ class LightBox {
   /// Content box body and border color.
   static const Color _cColor = Color(0xffCCCCCC);
 
+
+  LightBox(this.title, this.content, this.path);
+
   /// Displays the Lightbox immediately as soon as it is this is called.
   /// Waits for the widget to bind in the given [context] i.e: Widgets of the current context to be populated in the tree.
   LightBox.show(BuildContext context, {required this.title, this.path = './lib/assets/cat_working_hard.gif', this.content}) {
@@ -43,94 +46,98 @@ class LightBox {
 
   /// Light box Widget UI structure.
   Widget lightBoxDialog(BuildContext context) {
-    return Center(
-      child: Material(
-        color: Colors.transparent,
-        elevation: 8.0,
-        child: Container(
-          width: 815,
-          height: this.content != null ? 602.0 : 400.0,
-          child: Stack(
-            alignment: Alignment.centerLeft,
-            children: [
-              Container(
-                height: 250,
-                width: 660,
-                decoration: ShapeDecoration(shape: LightBoxCustomShape()),
-                alignment: Alignment.center,
-                child: BackdropFilter(filter: ui.ImageFilter.blur(sigmaX: _blur, sigmaY: _blur)),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // title
-                  Container(
-                    height: 250,
-                    width: 417,
-                    padding: EdgeInsets.all(5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 50.0,
-                          width: 50.0,
-                          child: IconButton(
-                            onPressed: () => Navigator.pop(context),
-                            icon: Icon(Icons.close_rounded, size: 30.0, color: Colors.redAccent),
-                            splashRadius: 25.0,
-                            alignment: Alignment.center,
-                            hoverColor: Colors.blue.withOpacity(0.3),
-                            splashColor: Colors.red.withOpacity(0.8),
-                          ),
-                        ),
-                        //  Title text
-                        Container(
-                          height: 160,
-                          width: 417,
-                          //color: Colors.red,
-                          padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 16.0),
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            alignment: Alignment.topLeft,
-                            child: Text(this.title, textDirection: TextDirection.ltr, textAlign: TextAlign.left, style: TextStyle(color: Colors.white)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // image
-                  Container(
-                    height: 398,
-                    width: 398,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.blue.withOpacity(0.5),
-                      image: DecorationImage(image: AssetImage(this.path), fit: BoxFit.cover),
-                    ),
-                  ),
-                ],
-              ),
-              Visibility(
-                visible: this.content == null ? false : true,
-                child: Positioned(
-                  left: 0.0,
-                  bottom: 95,
+    return Semantics(
+      label: 'lightbox',
+      child: Center(
+        child: Material(
+          color: Colors.transparent,
+          elevation: 8.0,
+          child: Container(
+            width: 815,
+            height: this.content != null ? 602.0 : 400.0,
+            child: Stack(
+              alignment: Alignment.centerLeft,
+              children: [
+                ClipRect(
                   child: Container(
-                    height: 120.0,
-                    width: 795.0,
-                    decoration: BoxDecoration(
-                      color: _cColor,
-                      borderRadius: BorderRadius.only(topLeft: _cRadius, bottomLeft: _cRadius, bottomRight: _cRadius),
-                      border: Border.all(color: _cColor, width: 2.0, style: BorderStyle.solid),
-                    ),
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(this.content != null ? this.content! : "", softWrap: true, style: TextStyle(fontSize: 16)),
+                    height: 250,
+                    width: 660,
+                    decoration: ShapeDecoration(shape: LightBoxCustomShape()),
+                    child: BackdropFilter(filter: ui.ImageFilter.blur(sigmaX: _blur, sigmaY: _blur)),
                   ),
                 ),
-              ),
-            ],
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // title
+                    Container(
+                      height: 250,
+                      width: 417,
+                      padding: EdgeInsets.all(5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 50.0,
+                            width: 50.0,
+                            child: IconButton(
+                              onPressed: () => Navigator.pop(context),
+                              icon: Icon(Icons.close_rounded, size: 30.0, color: Colors.redAccent),
+                              splashRadius: 25.0,
+                              alignment: Alignment.center,
+                              hoverColor: Colors.blue.withOpacity(0.3),
+                              splashColor: Colors.red.withOpacity(0.8),
+                            ),
+                          ),
+                          //  Title text
+                          Container(
+                            height: 160,
+                            width: 417,
+                            //color: Colors.red,
+                            padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 16.0),
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              alignment: Alignment.topLeft,
+                              child: Text(this.title, textDirection: TextDirection.ltr, textAlign: TextAlign.left, style: TextStyle(color: Colors.white,fontFamily: 'Gobold')),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // image
+                    Container(
+                      height: 398,
+                      width: 398,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue.withOpacity(0.5),
+                        image: DecorationImage(image: AssetImage(this.path), fit: BoxFit.cover),
+                      ),
+                    ),
+                  ],
+                ),
+                Visibility(
+                  visible: this.content == null ? false : true,
+                  child: Positioned(
+                    left: 0.0,
+                    bottom: 95,
+                    child: Container(
+                      height: 120.0,
+                      width: 795.0,
+                      decoration: BoxDecoration(
+                        color: _cColor,
+                        borderRadius: BorderRadius.only(topLeft: _cRadius, bottomLeft: _cRadius, bottomRight: _cRadius),
+                        border: Border.all(color: _cColor, width: 2.0, style: BorderStyle.solid),
+                      ),
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(this.content != null ? this.content! : "", softWrap: true, style: TextStyle(fontSize: 16)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -193,10 +200,11 @@ class LightBoxCustomShape extends ShapeBorder {
   @override
   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
     // final Paint _blurPaint = Paint()
-    //   ..color = Colors.transparent
     //   ..imageFilter = ui.ImageFilter.blur(sigmaY: blur, sigmaX: blur);
 
-    final Paint _bodyPaint = Paint()..shader = ui.Gradient.linear(rect.topLeft, rect.bottomRight, [Color(0xff525252).withOpacity(0.4), Color(0xffFFFFFF).withOpacity(0.4)]);
+    final Paint _bodyPaint = Paint()
+      ..shader = ui.Gradient.linear(rect.topLeft, rect.bottomRight, [Color(0xff525252).withOpacity(0.4), Color(0xffFFFFFF).withOpacity(0.4)])
+      ..imageFilter = ui.ImageFilter.blur(sigmaY: blur, sigmaX: blur);
 
     final Paint _border = Paint()
       ..style = PaintingStyle.stroke
@@ -204,7 +212,7 @@ class LightBoxCustomShape extends ShapeBorder {
       ..strokeWidth = 2.0;
 
     canvas.drawPath(_borderPath(rect, true), _bodyPaint);
-    //canvas.drawPath(_borderPath(rect), _blurPaint);
+    //canvas.drawPath(_borderPath(rect,true), _blurPaint);
     canvas.drawPath(_borderPath(rect, true), _border);
     canvas.drawPath(_borderPath(rect, false), _border);
   }
