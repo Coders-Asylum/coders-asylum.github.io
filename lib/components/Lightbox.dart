@@ -23,8 +23,10 @@ class LightBox {
 
   /// Corner radius for the light box.
   static const Radius _cRadius = Radius.circular(12.0);
+
   /// Blur strength.
   static const double _blur = 40.0;
+
   /// Content box body and border color.
   static const Color _cColor = Color(0xffCCCCCC);
 
@@ -40,8 +42,8 @@ class LightBox {
   }
 
   /// When called the light box is displayed with an delay. [delay] parameter time controls after how much delay the light box is displayed
-  LightBox.showDelayed(BuildContext context, Duration delay, {required this.title , this.path = './lib/assets/cat_working_hard.gif', this.content}) {
-    Future.delayed(delay, () => LightBox.show(context, title: title,content: this.content,path: this.path));
+  LightBox.showDelayed(BuildContext context, Duration delay, {required this.title, this.path = './lib/assets/cat_working_hard.gif', this.content}) {
+    Future.delayed(delay, () => LightBox.show(context, title: title, content: this.content, path: this.path));
   }
 
   /// Light box Widget UI structure.
