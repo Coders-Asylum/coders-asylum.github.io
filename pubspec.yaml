@@ -50,6 +50,7 @@ flutter:
     - lib/assets/
     - lib/assets/fonts/
     - lib/assets/res/
+    - lib/assets/res/animated/
 
   fonts:
     - family: Orbitron
