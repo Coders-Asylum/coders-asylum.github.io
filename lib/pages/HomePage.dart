@@ -9,7 +9,7 @@ import 'package:web/components/MenuBar.dart' show MenuBar;
 import 'package:web/components/SideBar.dart' show SideBar;
 import 'package:web/components/paint/CircleMatrix.dart' show CircleMatrix;
 import 'package:web/components/paint/TechLines.dart' show TechnologicalLinesAnimation;
-import 'package:web/components/Lightbox.dart'show LightBox;
+import 'package:web/components/Lightbox.dart' show LightBox;
 
 // Pages.
 import 'package:web/pages/BlogPage.dart' show BlogPage;

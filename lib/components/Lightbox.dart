@@ -30,7 +30,6 @@ class LightBox {
   /// Content box body and border color.
   static const Color _cColor = Color(0xffCCCCCC);
 
-
   LightBox(this.title, this.content, this.path);
 
   /// Displays the Lightbox immediately as soon as it is this is called.
@@ -102,7 +101,7 @@ class LightBox {
                             child: FittedBox(
                               fit: BoxFit.contain,
                               alignment: Alignment.topLeft,
-                              child: Text(this.title, textDirection: TextDirection.ltr, textAlign: TextAlign.left, style: TextStyle(color: Colors.white,fontFamily: 'Gobold')),
+                              child: Text(this.title, textDirection: TextDirection.ltr, textAlign: TextAlign.left, style: TextStyle(color: Colors.white, fontFamily: 'Gobold')),
                             ),
                           ),
                         ],
