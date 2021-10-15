@@ -210,48 +210,50 @@ class _IntroTileState extends State<IntroTile> {
               verticalHeight: _screenHeight - 50,
               verticalWidth: 40,
               alignment: Alignment.centerLeft,
-              child: Container(
-                height: 40.0,
-                width: 200,
-                alignment: Alignment.centerRight,
-                margin: EdgeInsets.only(left: 16.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 40.0,
-                      padding: EdgeInsets.all(5.0),
-                      child: RotatedBox(
-                        quarterTurns: 1,
-                        child: Icon(
-                          Icons.arrow_circle_down_rounded,
-                          size: 35.0,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 30.0,
-                      width: 145.0,
-                      margin: EdgeInsets.only(left: 5.0),
-                      padding: EdgeInsets.all(5.0),
-                      child: FittedBox(
-                        fit: BoxFit.fitHeight,
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Scroll down',
-                          style: TextStyle(
-                            fontFamily: 'Source Code',
-                            color: Theme.of(context).highlightColor,
+              children: [
+                Container(
+                  height: 40.0,
+                  width: 200,
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.only(left: 16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 40,
+                        width: 40.0,
+                        padding: EdgeInsets.all(5.0),
+                        child: RotatedBox(
+                          quarterTurns: 1,
+                          child: Icon(
+                            Icons.arrow_circle_down_rounded,
+                            size: 35.0,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                      Container(
+                        height: 30.0,
+                        width: 145.0,
+                        margin: EdgeInsets.only(left: 5.0),
+                        padding: EdgeInsets.all(5.0),
+                        child: FittedBox(
+                          fit: BoxFit.fitHeight,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Scroll down',
+                            style: TextStyle(
+                              fontFamily: 'Source Code',
+                              color: Theme.of(context).highlightColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
           // main tile
