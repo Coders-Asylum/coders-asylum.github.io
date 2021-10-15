@@ -31,7 +31,7 @@ void main() {
       ];
 
       // build the widget
-      await _t.pumpWidget(tool.materialTestWidget(FeaturedPostInfo(featuredPost: smokeTestFeaturedPost[0])));
+      await _t.pumpWidget(tool.mediaQueryTestWidget(FeaturedPostInfo(featuredPost: smokeTestFeaturedPost[0])));
       // find the built widget
       expect(find.text(smokeTestFeaturedPost[0].title), findsOneWidget, skip: true);
     });
@@ -53,7 +53,7 @@ void main() {
       // loops through the test feature post list, building the feature post for each list item.
       for (int i = 0; i < testFeaturedPost.length; i++) {
         // build widget
-        await _t.pumpWidget(tool.materialTestWidget(FeaturedPostInfo(featuredPost: testFeaturedPost[i])));
+        await _t.pumpWidget(tool.mediaQueryTestWidget(FeaturedPostInfo(featuredPost: testFeaturedPost[i])));
         expect(find.byWidget(FeaturedPostInfo(featuredPost: testFeaturedPost[i])), findsOneWidget, skip: true);
       }
     });
@@ -72,7 +72,7 @@ void main() {
     // test 3 : FeaturedTilePostNavDots
     testWidgets('FeaturedTilePostNavDots smoke test', (WidgetTester _t) async {
       // build widget
-      await _t.pumpWidget(tool.materialTestWidget(FeaturedPostTileNavDots(currentIndex: 0, totalPosts: testFeaturedPost.length)));
+      await _t.pumpWidget(tool.mediaQueryTestWidget(FeaturedPostTileNavDots(currentIndex: 0, totalPosts: testFeaturedPost.length)));
 
       expect(find.bySemanticsLabel('nav dots'), findsOneWidget);
     });
@@ -182,7 +182,7 @@ void main() {
       ];
 
       // build widget
-      await _t.pumpWidget(tool.materialTestWidget(FeaturedPostInfo(featuredPost: smokeTestFeaturedPost[0])));
+      await _t.pumpWidget(tool.mediaQueryTestWidget(FeaturedPostInfo(featuredPost: smokeTestFeaturedPost[0])));
 
       // find title
       expect(find.text(smokeTestFeaturedPost[0].title), findsWidgets, skip: true);
@@ -199,7 +199,7 @@ void main() {
       // loops through the test feature post list, building the feature post for each list item.
       for (int i = 0; i < testFeaturedPost.length; i++) {
         //build widget
-        await _t.pumpWidget(tool.materialTestWidget(FeaturedPostInfo(featuredPost: testFeaturedPost[i])));
+        await _t.pumpWidget(tool.mediaQueryTestWidget(FeaturedPostInfo(featuredPost: testFeaturedPost[i])));
         // find title
         expect(find.text(testFeaturedPost[i].title), findsWidgets, skip: true);
         // find topic
