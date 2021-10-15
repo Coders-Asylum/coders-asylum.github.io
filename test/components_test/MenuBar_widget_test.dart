@@ -11,7 +11,7 @@ void main() {
 
   //smoke test to see that the Menu bar is created inside a Scaffold.
   testWidgets('MenuBar is created', (WidgetTester tester) async {
-    await tester.pumpWidget(testTool.materialTestWidget(MenuBar(pageController: _pageController)));
+    await tester.pumpWidget(testTool.mediaQueryTestWidget(MenuBar(pageController: _pageController)));
 
     expect(find.bySemanticsLabel('menuBar'), findsOneWidget);
   });
