@@ -13,7 +13,7 @@ class WidgetTestTool {
 
   /// Material app to test larger multifunctional widgets and pages.
   ///
-  MaterialApp buildTestApp(Widget child){
+  MaterialApp buildTestApp(Widget child) {
     return MaterialApp(
       home: scaffoldTestWidget(child),
     );
