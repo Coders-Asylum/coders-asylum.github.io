@@ -338,7 +338,7 @@ class _IntroTileState extends State<IntroTile> {
                     width: 256.0,
                     height: 50.0,
                     text: 'Learn Basics',
-                    onPressed: () => print('learn basics button pressed.'),
+                        onPressed: () => print('learn basics button pressed.'),
                   ),
                 ),
                 // blog button
