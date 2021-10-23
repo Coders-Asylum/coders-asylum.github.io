@@ -17,7 +17,7 @@ class Button extends StatefulWidget {
   /// Function called when the button is pressed.
   final VoidCallback? onPressed;
 
-  const Button({Key? key, required this.height, required this.width, required this.text, this.onPressed }) : super(key: key);
+  const Button({Key? key, required this.height, required this.width, required this.text, this.onPressed}) : super(key: key);
 
   _ButtonState createState() => _ButtonState();
 }
