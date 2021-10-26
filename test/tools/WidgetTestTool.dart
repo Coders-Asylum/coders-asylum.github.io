@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class WidgetTestTool {
   /// Returns the widget passed in the [child] after wrapping it with [MediaQuery] and [MaterialApp].
-  Widget mediaQueryTestWidget(Widget child) {
-    return MediaQuery(data: MediaQueryData(size: Size(1440, 1080)), child: MaterialApp(home: child));
+  /// [screenSize] is used to specify a custom screen size to test the app in.
+  Widget mediaQueryTestWidget(Widget child, {Size screenSize = const Size(1440, 1080)}) {
+    return MediaQuery(data: MediaQueryData(size: screenSize), child: MaterialApp(home: child));
   }
 
   ///  /// Returns the widget passed in the [child] after wrapping it with [MediaQuery] and [Scaffold].
