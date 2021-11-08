@@ -2,6 +2,8 @@ name: Rita Reporter (Coverage Reporter)
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
     
 jobs:
   upload_coverage:
