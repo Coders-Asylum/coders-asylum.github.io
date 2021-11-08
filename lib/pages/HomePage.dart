@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 allowImplicitScrolling: false,
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  _HomeScreen(),
+                  HomeScreen(),
                   Container(),
                   Container(),
                   BlogPage(),
@@ -70,11 +70,11 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class _HomeScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<_HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   // constant screen height and width
   static const double _kHeight = 1024.0;
   static const double _kWidth = 1440.0;
@@ -119,47 +119,50 @@ class _HomeScreenState extends State<_HomeScreen> {
     //stores the current height and width of the current screen.
     final _screenWidth = MediaQuery.of(context).size.width;
     final _screenHeight = MediaQuery.of(context).size.height;
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constrains) {
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            // Tech lines animation
-            Positioned(
-              top: _screenHeight * 0.2796,
-              left: _screenWidth * 0.1525,
-              child: Container(
-                child: TechnologicalLinesAnimation(scrollDirection: _userScrollDirection),
+    return Semantics(
+      label:'homeScreen',
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constrains) {
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              // Tech lines animation
+              Positioned(
+                top: _screenHeight * 0.2796,
+                left: _screenWidth * 0.1525,
+                child: Container(
+                  child: TechnologicalLinesAnimation(scrollDirection: _userScrollDirection),
+                ),
               ),
-            ),
-            Scrollbar(
-              controller: _scrollController,
-              child: SingleChildScrollView(
+              Scrollbar(
                 controller: _scrollController,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    IntroTile(safeArea: Size(_kWidth, _kHeight)),
-                    Container(
-                      height: _kHeight,
-                      width: _kWidth,
-                    ),
-                    Container(
-                      width: _screenWidth,
-                      alignment: Alignment.center,
-                      child: Container(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      IntroTile(safeArea: Size(_kWidth, _kHeight)),
+                      Container(
                         height: _kHeight,
                         width: _kWidth,
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: _screenWidth,
+                        alignment: Alignment.center,
+                        child: Container(
+                          height: _kHeight,
+                          width: _kWidth,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     );
   }
 }
