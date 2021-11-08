@@ -24,6 +24,6 @@ void main() {
       await tester.pumpWidget(_buildApp);
       await tester.pumpAndSettle();
       expect(find.bySemanticsLabel('homeScreen'), findsOneWidget);
-    },skip:true,semanticsEnabled: true);
+    }, skip: true, semanticsEnabled: true);
   });
 }

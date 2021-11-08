@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final _screenWidth = MediaQuery.of(context).size.width;
     final _screenHeight = MediaQuery.of(context).size.height;
     return Semantics(
-      label:'homeScreen',
+      label: 'homeScreen',
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constrains) {
           return Stack(
