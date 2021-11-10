@@ -87,7 +87,6 @@ class _BlogPageState extends State<BlogPage> {
   }
 }
 
-
 /// Tile that shows the featured post for a week.
 /// The post with meta data ```featured:true``` shows up in descending order of timeOfPost.
 ///
