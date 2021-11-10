@@ -1,7 +1,7 @@
 import 'dart:async' show Timer;
 
 import 'package:flutter/material.dart';
-import 'package:web/components/blogPage/FeaturedPostTileComponents.dart';
+import 'package:web/components/blogPage/FeaturedPostTileComponents.dart' show FeaturedPostTileNavButton, FeaturedPostTileNavDots, FeaturedPostInfo, FeaturedPost, NavDirection;
 import 'package:web/components/blogPage/TopicsTileComponents.dart';
 
 ///todo: remove this demo lists.
@@ -11,6 +11,8 @@ const List<FeaturedPost> _featuredPost = [
   FeaturedPost('DJI Mavic Air- Redefining portability.', ['test'], ['test1'], '/test/res/test_images/blue.jpg', 'mr nerd'),
 ];
 
+/// [_topics] only used to for testing and
+/// emulating topics for topics tile.
 const List<Topic> _topics = [
   Topic(
     name: 'Flutter',
@@ -40,6 +42,7 @@ const List<Topic> _topics = [
   Topic(name: 'More Topics', text: '+1', noOfPosts: 55, description: 'More Interesting topic, view them all'),
 ];
 
+/// This page shows
 class BlogPage extends StatefulWidget {
   _BlogPageState createState() => _BlogPageState();
 }
@@ -84,6 +87,12 @@ class _BlogPageState extends State<BlogPage> {
   }
 }
 
+
+/// Tile that shows the featured post for a week.
+/// The post with meta data ```featured:true``` shows up in descending order of timeOfPost.
+///
+/// This also automatically  scrolls horizontally through the featured post periodically with [animateFeaturedPost] function.
+/// [FeaturedPostTileNavButton] Helps in manual change of the featured posts by the user.
 class FeaturedTile extends StatefulWidget {
   final Size screenSize;
 
@@ -138,6 +147,9 @@ class _FeaturedTileState extends State<FeaturedTile> with SingleTickerProviderSt
   //}
 
   /// Changes the Feature post to the next/previous post on Button tap.
+  /// [direction] specified the horizontal scroll direction of the post.
+  ///
+  /// Periodically calling this will automatically change the post in the FeaturedPostTile.
   void changeFeaturedPost(NavDirection direction) {
     late final double _offset;
     final double _currentOffset = (widget.screenSize.width) * _currentIndex;
@@ -165,6 +177,7 @@ class _FeaturedTileState extends State<FeaturedTile> with SingleTickerProviderSt
     setState(() {});
   }
 
+  ///
   void animateFeaturedPost() async {
     Timer.periodic(Duration(seconds: 5, milliseconds: 500), (t) async {
       changeFeaturedPost(NavDirection.forward);
