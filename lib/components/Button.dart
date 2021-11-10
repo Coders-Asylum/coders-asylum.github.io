@@ -15,7 +15,7 @@ class Button extends StatefulWidget {
   final String text;
 
   /// Function called when the button is pressed.
-  final Function? onPressed;
+  final VoidCallback? onPressed;
 
   const Button({Key? key, required this.height, required this.width, required this.text, this.onPressed}) : super(key: key);
 
@@ -88,7 +88,10 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
               border: Border.all(color: Theme.of(context).highlightColor.withOpacity(_animatedOpacity.value), width: 2.0),
             ),
             child: TextButton(
-              onPressed: () => print('oresse'),
+              onPressed: () {
+                print('button tapped');
+                widget.onPressed!();
+              },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(EdgeInsets.all(2.0)),
                 overlayColor: MaterialStateProperty.all(Colors.transparent),

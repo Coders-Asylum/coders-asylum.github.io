@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 allowImplicitScrolling: false,
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  _HomeScreen(),
+                  HomeScreen(),
                   Container(),
                   Container(),
                   BlogPage(),
@@ -70,11 +70,11 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class _HomeScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<_HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   // constant screen height and width
   static const double _kHeight = 1024.0;
   static const double _kWidth = 1440.0;
@@ -119,47 +119,50 @@ class _HomeScreenState extends State<_HomeScreen> {
     //stores the current height and width of the current screen.
     final _screenWidth = MediaQuery.of(context).size.width;
     final _screenHeight = MediaQuery.of(context).size.height;
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constrains) {
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            // Tech lines animation
-            Positioned(
-              top: _screenHeight * 0.2796,
-              left: _screenWidth * 0.1525,
-              child: Container(
-                child: TechnologicalLinesAnimation(scrollDirection: _userScrollDirection),
+    return Semantics(
+      label: 'homeScreen',
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constrains) {
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              // Tech lines animation
+              Positioned(
+                top: _screenHeight * 0.2796,
+                left: _screenWidth * 0.1525,
+                child: Container(
+                  child: TechnologicalLinesAnimation(scrollDirection: _userScrollDirection),
+                ),
               ),
-            ),
-            Scrollbar(
-              controller: _scrollController,
-              child: SingleChildScrollView(
+              Scrollbar(
                 controller: _scrollController,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    IntroTile(safeArea: Size(_kWidth, _kHeight)),
-                    Container(
-                      height: _kHeight,
-                      width: _kWidth,
-                    ),
-                    Container(
-                      width: _screenWidth,
-                      alignment: Alignment.center,
-                      child: Container(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      IntroTile(safeArea: Size(_kWidth, _kHeight)),
+                      Container(
                         height: _kHeight,
                         width: _kWidth,
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: _screenWidth,
+                        alignment: Alignment.center,
+                        child: Container(
+                          height: _kHeight,
+                          width: _kWidth,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     );
   }
 }
@@ -210,48 +213,50 @@ class _IntroTileState extends State<IntroTile> {
               verticalHeight: _screenHeight - 50,
               verticalWidth: 40,
               alignment: Alignment.centerLeft,
-              child: Container(
-                height: 40.0,
-                width: 200,
-                alignment: Alignment.centerRight,
-                margin: EdgeInsets.only(left: 16.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 40.0,
-                      padding: EdgeInsets.all(5.0),
-                      child: RotatedBox(
-                        quarterTurns: 1,
-                        child: Icon(
-                          Icons.arrow_circle_down_rounded,
-                          size: 35.0,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 30.0,
-                      width: 145.0,
-                      margin: EdgeInsets.only(left: 5.0),
-                      padding: EdgeInsets.all(5.0),
-                      child: FittedBox(
-                        fit: BoxFit.fitHeight,
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Scroll down',
-                          style: TextStyle(
-                            fontFamily: 'Source Code',
-                            color: Theme.of(context).highlightColor,
+              children: [
+                Container(
+                  height: 40.0,
+                  width: 200,
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.only(left: 16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 40,
+                        width: 40.0,
+                        padding: EdgeInsets.all(5.0),
+                        child: RotatedBox(
+                          quarterTurns: 1,
+                          child: Icon(
+                            Icons.arrow_circle_down_rounded,
+                            size: 35.0,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                      Container(
+                        height: 30.0,
+                        width: 145.0,
+                        margin: EdgeInsets.only(left: 5.0),
+                        padding: EdgeInsets.all(5.0),
+                        child: FittedBox(
+                          fit: BoxFit.fitHeight,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Scroll down',
+                            style: TextStyle(
+                              fontFamily: 'Source Code',
+                              color: Theme.of(context).highlightColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
           // main tile
