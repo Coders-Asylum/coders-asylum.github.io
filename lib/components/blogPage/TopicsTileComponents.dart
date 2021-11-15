@@ -137,7 +137,7 @@ class _TopicContainerState extends State<TopicContainer> with SingleTickerProvid
                 duration: Duration(milliseconds: _visible ? _milliseconds * 3 : _milliseconds - 50),
                 curve: _curve,
                 height: _visible ? (_height - 16.0) * 0.25 : 0.0,
-                width: _width-16.0,
+                width: _width - 16.0,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Colors.black.withOpacity(0.3), borderRadius: BorderRadius.circular(12.0)),
                 padding: EdgeInsets.all(_visible ? 8.0 : 0.0),
@@ -150,7 +150,7 @@ class _TopicContainerState extends State<TopicContainer> with SingleTickerProvid
                     mouseCursor: SystemMouseCursors.text,
                     children: <TextSpan>[
                       TextSpan(text: "${widget.topic.name}\n", style: TextStyle(fontSize: 20.0, fontFamily: 'Gobold', color: Theme.of(context).primaryColor)),
-                      TextSpan(text: widget.topic.description,style: TextStyle(fontSize: 12.0, fontFamily: 'Source Code', color: Theme.of(context).highlightColor,overflow: TextOverflow.ellipsis)),
+                      TextSpan(text: widget.topic.description, style: TextStyle(fontSize: 12.0, fontFamily: 'Source Code', color: Theme.of(context).highlightColor, overflow: TextOverflow.ellipsis)),
                     ],
                   ),
                 ),

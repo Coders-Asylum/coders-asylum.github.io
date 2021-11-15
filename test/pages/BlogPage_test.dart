@@ -34,7 +34,6 @@ void main() {
 
   group('DividerLine tests', () {
     testWidgets('DividerLine smoke test', (WidgetTester tester) async {
-
       // test app
       MaterialApp _buildApp = tool.buildTestApp(Container(
         width: 1440,
