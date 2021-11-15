@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart' show Center, MaterialApp, Size;
+import 'package:flutter/material.dart' show Center, Container, MaterialApp, Size;
 import 'package:web/pages/BlogPage.dart';
 import '../tools/WidgetTestTool.dart' show WidgetTestTool;
 
@@ -30,5 +30,22 @@ void main() {
     }, skip: true);
 
     /// todo:
+  });
+
+  group('DividerLine tests', () {
+    testWidgets('DividerLine smoke test', (WidgetTester tester) async {
+
+      // test app
+      MaterialApp _buildApp = tool.buildTestApp(Container(
+        width: 1440,
+        height: 400,
+        child: Center(child: DividerLine(width: 1440 * 0.8)),
+      ));
+
+      await tester.pumpWidget(_buildApp);
+      await tester.pumpAndSettle();
+
+      expect(find.bySemanticsLabel('dividerLine'), findsOneWidget);
+    });
   });
 }
