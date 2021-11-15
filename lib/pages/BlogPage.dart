@@ -74,6 +74,7 @@ class _BlogPageState extends State<BlogPage> {
                       children: [
                         FeaturedTile(screenSize: Size(_screenWidth, _screenHeight)),
                         TopicsTile(screenSize: Size(_screenWidth, _screenHeight)),
+                        Container(width: MediaQuery.of(context).size.width, height: 30.0, child: DividerLine(width: MediaQuery.of(context).size.width * 0.8)),
                       ],
                     ),
                   ),
@@ -290,7 +291,7 @@ class _TopicsTileState extends State<TopicsTile> {
   static const double _rad = 12.0;
 
   /// Height of each [TopicContainer]
-  static const double _topicContainerHeight = 250.0;
+  static const double _topicContainerHeight = 251.0;
 
   /// Width of each [TopicContainer]
   static const double _topicContainerWidth = 190.0;
@@ -344,6 +345,62 @@ class _TopicsTileState extends State<TopicsTile> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Creates a divider line to show change of contents context in the UI.
+///
+/// eg Code:
+/// ``` dart
+///  // parent widget.
+///  Container(
+///     height: 100.0,
+///     width: 600.0,
+///     child: DividerLine(
+///         width: 600.0*0.8, // 80% of the width of the parent widget.
+///     ),
+///  );
+/// ```
+///
+class DividerLine extends StatelessWidget {
+  /// Width of the divider line.
+  ///
+  /// should be 80% of the parent width for better and standard visual practice.
+  ///
+  final double width;
+
+  /// Color of the Divider line.
+  final Color color;
+
+  /// This is the stroke width of the line, is defaulted to 8.
+  final double lineWidth;
+
+  /// Defines the decoration of the divider line, is initialized in the constructor.
+  late final Decoration _decoration;
+
+  //constructor
+  DividerLine({Key? key, required this.width, this.color = Colors.white, this.lineWidth = 8.0}) : super(key: key) {
+    _decoration = BoxDecoration(
+      color: this.color,
+      borderRadius: BorderRadius.all(Radius.circular(this.lineWidth / 2)),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: 'dividerLine',
+      child: Container(
+        height: this.lineWidth + 4,
+        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
+        child: Container(
+          width: this.width,
+          height: this.lineWidth,
+          decoration: _decoration,
+        ),
       ),
     );
   }
