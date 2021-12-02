@@ -1,5 +1,7 @@
+import 'dart:ui' as ui show ImageFilter;
 import 'package:flutter/material.dart';
-import 'package:web/components/NameIconWidget.dart';
+import 'package:web/components/NameIconWidget.dart' show NameIcon;
+import 'package:web/components/blogPage/AuthorInfoWidget.dart' show AuthorPostInfoMiniatureWidget;
 
 class Post {}
 
@@ -33,14 +35,6 @@ class NormalPostTile extends StatefulWidget {
 class _NormalPostTileState extends State<NormalPostTile> {
   /// Background color for normal tile.
   static const Color _backgroundColor = Color(0xff2C2C2C);
-
-  /// Creates a vertical line that acts as an divider between widgets.
-  Widget verticalDivider() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(2.0, 0.0, 2.0, 0.0),
-      child: VerticalDivider(width: 18.0, color: Theme.of(context).highlightColor, endIndent: 1.0, indent: 1.0, thickness: 1.5),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,54 +83,13 @@ class _NormalPostTileState extends State<NormalPostTile> {
                       maxLines: 3, softWrap: true, style: TextStyle(fontFamily: 'Source Code', fontSize: 18.0, overflow: TextOverflow.ellipsis, color: Theme.of(context).highlightColor)),
                 ),
                 //Author name placeholder and post details.
-                Container(
-                  height: 24.0,
+                AuthorPostInfoMiniatureWidget(
+                  height: 24,
                   width: 579,
-                  margin: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      // Author name.
-                      Expanded(
-                        flex: 1,
-                        child: SizedBox(
-                            height: 24.0,
-                            child: FittedBox(
-                                fit: BoxFit.contain,
-                                alignment: Alignment.centerLeft,
-                                child: RichText(
-                                    text: TextSpan(children: [
-                                  TextSpan(text: 'by ', style: TextStyle(color: Theme.of(context).highlightColor)),
-                                  TextSpan(text: widget.authorName, style: TextStyle(color: ColorScheme.fromSwatch().secondary))
-                                ], style: TextStyle(fontSize: 18, fontFamily: 'Orbitron'))))),
-                      ),
-                      verticalDivider(),
-                      // Time placeholder.
-                      Expanded(
-                          flex: 2,
-                          child: SizedBox(
-                              child: FittedBox(
-                            fit: BoxFit.contain,
-                            alignment: Alignment.centerLeft,
-                            child: Text(widget.postDateTime.toString(), style: TextStyle(fontSize: 18, fontFamily: 'Orbitron', color: Theme.of(context).highlightColor)),
-                          ))),
-                      verticalDivider(),
-                      //Like Icon
-                      SizedBox(height: 24.0, width: 24.0, child: Icon(Icons.thumb_up, size: 18.0, color: Colors.white)),
-                      // Like count
-                      Expanded(
-                          flex: 1,
-                          child: SizedBox(
-                            height: 24.0,
-                              child: FittedBox(
-                            alignment: Alignment.centerLeft,
-                            fit: BoxFit.contain,
-                            child: Text(widget.postLikes.toString(), style: TextStyle(fontSize: 18, fontFamily: 'Orbitron', color: Theme.of(context).highlightColor)),
-                          )))
-                    ],
-                  ),
-                )
+                  authorName: widget.authorName,
+                  postDateTime: widget.postDateTime,
+                  postLikes: widget.postLikes,
+                ),
               ],
             )
           ],
@@ -146,3 +99,150 @@ class _NormalPostTileState extends State<NormalPostTile> {
   }
 }
 
+/// An Image post displays the feature image enlarged.
+/// Which shows more attraction to the post.
+///
+///
+/// And the subtitle is floating in a box over an image giving some visual enhancement.
+class ImagePostTile extends StatefulWidget {
+  /// Title of the post.
+  final String title;
+
+  /// Relative path of the post image.
+  final String? imageUrl;
+
+  /// Sub title of the post.
+  final String? subtitle;
+
+  /// Name of the Author of the post.
+  final String authorName;
+
+  /// Post date and time of publish in UTC.
+  final DateTime? postDateTime;
+
+  /// Post number of likes.
+  final int? postLikes;
+
+  _ImagePostTileState createState() => _ImagePostTileState();
+
+  const ImagePostTile({Key? key, required this.title, this.imageUrl, this.subtitle, this.authorName = 'Anonymous', this.postDateTime, this.postLikes}) : super(key: key);
+}
+
+class _ImagePostTileState extends State<ImagePostTile> {
+  /// Height of the widget
+  static const double _height = 702;
+
+  /// Width of the widget.
+  static const double _width = 971;
+
+  /// Blur strength for the subtitle container.
+  static const double _blur = 8.0;
+
+  /// Corner radius of the boxes.
+  static const double _rad = 8.0;
+
+  /// This takes in the [text] and returns a widget that shows the text has a text with stroke.
+  ///
+  /// This works in the way where it lays a text with stroke using the foreground parameter
+  /// over normal text using the [stack] widget.
+  Widget strokedText(String text, {Color color = Colors.white, double strokeWidth = 0.5, Color strokeColor = Colors.black, double fontSize = 22.0, String fontFace = 'Orbitron'}) {
+    /// key to differentiate the un-stroked Text Widget.
+    const Key _unStroked = Key('unStroked_text');
+
+    /// key to differentiate the stroked Text Widget.
+    const Key _stroked = Key('stroked_text');
+
+    /// This specifies the common textStyle properties in one parameter.
+    TextStyle textStyle = TextStyle(fontSize: fontSize, fontFamily: fontFace);
+
+    return Stack(children: [
+      Text(text,
+          key: _stroked,
+          style: textStyle.copyWith(
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = strokeWidth
+                ..color = strokeColor),
+          softWrap: true),
+      Text(text, key: _unStroked, style: textStyle.copyWith(color: color), softWrap: true),
+    ]);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: 'imagePost',
+      child: Container(
+        height: _height,
+        width: _width,
+        padding: EdgeInsets.all(8.0),
+        decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(_rad)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            // title place holder.
+            SizedBox(
+              height: 101,
+              width: 882,
+              child: Text(widget.title, softWrap: true, style: TextStyle(fontSize: 42, color: Color(0xff1366C8))),
+            ),
+
+            AuthorPostInfoMiniatureWidget(height: 24.0, width: 524, authorName: widget.authorName, postDateTime: widget.postDateTime, postLikes: widget.postLikes),
+            // Image and subtitle placeholder.
+            Container(
+              height: 507.37,
+              width: MediaQuery.of(context).size.width, //920,
+              alignment: Alignment.center,
+              child: Stack(
+                alignment: Alignment.center,
+                fit: StackFit.loose,
+                children: [
+                  Container(
+                    height: 507.37,
+                    width: 920,
+                    decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      image: DecorationImage(image: NetworkImage('/lib/assets/iron.jpg'), fit: BoxFit.fill, alignment: Alignment.center),
+                      borderRadius: BorderRadius.circular(_rad),
+                    ),
+                  ),
+                  // subtitle
+
+                  Positioned(
+                      bottom: _height - (_height - 16.0),
+                      left: _width - (_width - 16.0),
+                      child: Visibility(
+                        visible: widget.subtitle != null,
+                        child: ClipRect(
+                          child: BackdropFilter(
+                            filter: ui.ImageFilter.blur(sigmaY: _blur, sigmaX: _blur),
+                            child: Container(
+                              height: 162.0,
+                              width: 612,
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [Color(0xff000000).withOpacity(0.64), Color(0xff484848).withOpacity(0.64)], begin: Alignment.topLeft, end: Alignment.bottomRight, stops: [0.30, 1.0]),
+                                borderRadius: BorderRadius.circular(_rad),
+                              ),
+                              child: strokedText(widget.subtitle!),
+                            ),
+                          ),
+                        ),
+                      ))
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+@visibleForTesting
+Widget strokeTextTest(String text, {Color color = Colors.white, double strokeWidth = 0.5, Color strokeColor = Colors.black, double fontSize = 22.0, String fontFace = 'Orbitron'}) {
+  return _ImagePostTileState().strokedText(text, color: color, strokeWidth: strokeWidth, strokeColor: strokeColor, fontSize: fontSize, fontFace: fontFace);
+}
