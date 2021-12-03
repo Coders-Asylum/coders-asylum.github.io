@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show Center, Color, Colors, Container, Key, MaterialApp, Paint, PaintingStyle, Text, TextStyle, Widget;
+import 'package:flutter/material.dart' show Center, Color, Colors, Container, Key, MaterialApp, Paint, PaintingStyle, Text, TextStyle;
 import 'package:flutter_test/flutter_test.dart';
 import '../tools/WidgetTestTool.dart';
 import 'package:web/components/blogPage/AllPostsTileComponents.dart';
