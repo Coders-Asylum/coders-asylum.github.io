@@ -35,7 +35,7 @@ class _AuthorPostInfoMiniatureWidgetState extends State<AuthorPostInfoMiniatureW
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.height,//24.0,
+      height: widget.height, //24.0,
       width: widget.width, //579,
       margin: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
       child: Row(
