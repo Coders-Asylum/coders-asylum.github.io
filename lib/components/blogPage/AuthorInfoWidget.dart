@@ -24,6 +24,7 @@ class AuthorPostInfoMiniatureWidget extends StatefulWidget {
 }
 
 class _AuthorPostInfoMiniatureWidgetState extends State<AuthorPostInfoMiniatureWidget> {
+
   /// Creates a vertical line that acts as an divider between widgets.
   Widget verticalDivider() {
     return Padding(
@@ -84,3 +85,8 @@ class _AuthorPostInfoMiniatureWidgetState extends State<AuthorPostInfoMiniatureW
     );
   }
 }
+
+
+/// expose for testing
+@visibleForTesting
+Widget testVerticalDivider() => _AuthorPostInfoMiniatureWidgetState().verticalDivider();
