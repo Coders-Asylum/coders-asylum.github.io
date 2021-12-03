@@ -12,19 +12,18 @@ void main() {
   /// build for widget.
   final MaterialApp _build = tool.buildTestApp(Center(
       child: AuthorPostInfoMiniatureWidget(
-        height: 60.0,
-        width: 400.0,
-        key: _key,
-        postLikes: 22,
-        postDateTime: DateTime.now(),
-        authorName: "Test Author",
-      )));
+    height: 60.0,
+    width: 400.0,
+    key: _key,
+    postLikes: 22,
+    postDateTime: DateTime.now(),
+    authorName: "Test Author",
+  )));
 
   // tests
   group('AuthorPostInfoMiniatureWidget tests', () {
     //smoke test.
     testWidgets('AuthorInfoWidget smoke test', (tester) async {
-
       await tester.pumpWidget(_build);
       await tester.pumpAndSettle();
 
@@ -32,42 +31,34 @@ void main() {
     });
 
     // test details
-    group('AuthorPostInfoMiniatureWidget details test', (){
-
+    group('AuthorPostInfoMiniatureWidget details test', () {
       //test author name.
       /// todo: check for author name text finder in testing.
-      testWidgets('AuthorPostInfoMiniatureWidget author name test', (tester)async {
-
+      testWidgets('AuthorPostInfoMiniatureWidget author name test', (tester) async {
         await tester.pumpWidget(_build);
         await tester.pumpAndSettle();
 
-        expect(find.text('Test Author'),findsWidgets);
-      },skip: true);
+        expect(find.text('Test Author'), findsWidgets);
+      }, skip: true);
 
       //test like icon.
-      testWidgets('AuthorPostInfoMiniatureWidget author name test', (tester)async {
-
+      testWidgets('AuthorPostInfoMiniatureWidget author name test', (tester) async {
         await tester.pumpWidget(_build);
         await tester.pumpAndSettle();
 
-        expect(find.byIcon(Icons.thumb_up),findsWidgets);
+        expect(find.byIcon(Icons.thumb_up), findsWidgets);
       });
     });
 
-
     // divider widget test.
     /// todo: widget error  popping as defunct (no state found).
-    testWidgets('divider smoke test',(tester )async{
-
+    testWidgets('divider smoke test', (tester) async {
       final MaterialApp _build = tool.buildTestApp(Center(child: testVerticalDivider()));
 
       await tester.pumpWidget(_build);
       await tester.pumpAndSettle();
 
-
-      expect(find.byWidget(_build),findsOneWidget);
-
-    },skip: true);
-
+      expect(find.byWidget(_build), findsOneWidget);
+    }, skip: true);
   });
 }
