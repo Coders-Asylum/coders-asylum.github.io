@@ -24,7 +24,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byWidget(_build), findsOneWidget);
-    },skip: true);
+    }, skip: true);
   });
 
   group('ImagePost test', () {
