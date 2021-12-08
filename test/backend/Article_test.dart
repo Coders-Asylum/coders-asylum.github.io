@@ -6,31 +6,33 @@ import 'package:web/backend/Article.dart';
 void main() {
   group('Comment class tests', () {
     test('Comment class recursive function test: no recursion occurs', () async {
-      String jsonString = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}';      Comment c = Comment(json.decode(jsonString));
+      String jsonString = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}';
+      Comment c = Comment(json.decode(jsonString));
       // match the passed Map as string with the class toString() method return.
-      expect(json.decode(jsonString),json.decode(c.toString()));
+      expect(json.decode(jsonString), json.decode(c.toString()));
     });
 
     test('Comment class recursive function test: recursion occurs', () async {
       String jsonString =
-            '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:1","name":"tester","timeStamp":"2021-12-08 16:50:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}, {"id":"1:2","name":"tester","timeStamp":"2021-12-08 17:45:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:2:1","name":"tester","timeStamp":"2021-12-08 17:50:30.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}]}]}';
+          '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:1","name":"tester","timeStamp":"2021-12-08 16:50:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}, {"id":"1:2","name":"tester","timeStamp":"2021-12-08 17:45:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:2:1","name":"tester","timeStamp":"2021-12-08 17:50:30.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}]}]}';
       // create an Comment object.
       Comment c = Comment(json.decode(jsonString));
       // match the passed Map as string with the class toString() method return.
-      expect(json.decode(jsonString),json.decode(c.toString()));
+      expect(json.decode(jsonString), json.decode(c.toString()));
     });
 
-    test('Comment class encode method test',()async{
-      String jsonString = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}';      Comment c = Comment(json.decode(jsonString));
+    test('Comment class encode method test', () async {
+      String jsonString = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}';
+      Comment c = Comment(json.decode(jsonString));
 
       // comment object 1
       Comment c1 = Comment(json.decode(jsonString));
       // comment object 2
       /// todo: create a way to directly access and stub the encode method.
-      late Comment c2 ;
+      late Comment c2;
 
       // overriding c2 object with the same string and calling the internal encode function.
-      c2= Comment(json.decode(jsonString));
+      c2 = Comment(json.decode(jsonString));
 
       // see if the objects match.
       expect(c1.toString(), c2.toString());
