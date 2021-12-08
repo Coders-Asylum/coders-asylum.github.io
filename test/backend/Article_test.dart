@@ -23,8 +23,6 @@ void main() {
 
     test('Comment class encode method test', () async {
       String jsonString = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}';
-      Comment c = Comment(json.decode(jsonString));
-
       // comment object 1
       Comment c1 = Comment(json.decode(jsonString));
       // comment object 2
@@ -41,7 +39,7 @@ void main() {
 }
 
 /// only used for testing,
-/// todo: remove and moved to test files after meta data files auto-populating, and test data would be readby files.
+/// todo: remove and moved to test files after meta data files auto-populating, and test data would be read by files.
 const String testJSONString = '''
 
 [{
