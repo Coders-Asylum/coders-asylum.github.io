@@ -210,7 +210,13 @@ class Comment {
   ///
   /// After constructing the object by this method the [commentString] is also populated using the attributes.
   Comment.define({required this.id, required this.timeStamp, this.name = 'Anonymous Yoda', required this.comment, this.flags, this.reply}) {
-    this.commentString = {"id": this.id, "name": this.name, "timeStamp": this.timeStamp, "comment": this.comment, "flags": this.flags, "reply": this.reply};
+    late List<String> _l = [];
+
+    this.reply!.forEach((c) {
+      _l.add(c.toString());
+    });
+
+    this.commentString = {"id": this.id, "name": this.name, "timeStamp": this.timeStamp.toUtc().toString(), "comment": this.comment, "flags": this.flags, "reply": _l};
   }
 
   /// This takes in [source] which is a map structure and then individually populates all the class attributes.
@@ -249,6 +255,7 @@ class Comment {
   }
 
   /// Converts the attributes to String and also follows a JSON object structure for the [Comment] class.
+  /// todo:@maverick099 use json.encode instead of manually specifying the json structure in the toString method.
   @override
   String toString() {
     if (this.reply == null || this.reply == []) {
