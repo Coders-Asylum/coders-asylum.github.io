@@ -1,12 +1,15 @@
 import 'dart:convert' show json;
 
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:web/backend/Article.dart';
 
 void main() {
   group('Comment class tests', () {
-    test('Comment class recursive function test: no recursion occurs', () async {
+    test('Comment class recursive function test: no recursion occurs.', () async {
+      // JSON string to be passed.
       String jsonString = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}';
+
       Comment c = Comment(json.decode(jsonString));
       // match the passed Map as string with the class toString() method return.
       expect(json.decode(jsonString), json.decode(c.toString()));
@@ -20,6 +23,44 @@ void main() {
       // match the passed Map as string with the class toString() method return.
       expect(json.decode(jsonString), json.decode(c.toString()));
     });
+
+    test('Comment class recursive function test: no recursion occurs and null reply is placed as empty list in object creation', () async {
+      // JSON string to be passed.
+      String jsonString = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":null}';
+      // JSON string to be compared.
+      String jsonString2 = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}';
+
+      Comment c = Comment(json.decode(jsonString));
+      // match the passed Map as string with the class toString() method return.
+      expect(json.decode(jsonString2), json.decode(c.toString()));
+    });
+
+
+
+
+    test('Comment class .define named constructor test',()async{
+      // json object to be compared.
+      String jsonString =
+          '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:1","name":"tester","timeStamp":"2021-12-08 16:50:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}, {"id":"1:2","name":"tester","timeStamp":"2021-12-08 17:45:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:2:1","name":"tester","timeStamp":"2021-12-08 17:50:30.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}]}]}';
+
+      Comment c = Comment.define(id: '1',name:'tester', timeStamp: DateTime.parse('2021-12-08 16:07:29.551Z'), comment: "test comment",flags:["pinned","author"],reply: [Comment({"id":"1:1","name":"tester","timeStamp":"2021-12-08 16:50:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}),Comment({"id":"1:2","name":"tester","timeStamp":"2021-12-08 17:45:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:2:1","name":"tester","timeStamp":"2021-12-08 17:50:30.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}]})]);
+
+      expect(json.decode(jsonString),json.decode(c.toString()));
+    });
+
+    test('Comment class .define named constructor and commentString test',()async{
+      // json object to be compared.
+      String jsonString =
+          '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:1","name":"tester","timeStamp":"2021-12-08 16:50:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}, {"id":"1:2","name":"tester","timeStamp":"2021-12-08 17:45:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:2:1","name":"tester","timeStamp":"2021-12-08 17:50:30.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}]}]}';
+
+      // object created using define named constructor.
+      Comment c = Comment.define(id: '1',name:'tester', timeStamp: DateTime.parse('2021-12-08 16:07:29.551Z'), comment: "test comment",flags:["pinned","author"],reply: [Comment({"id":"1:1","name":"tester","timeStamp":"2021-12-08 16:50:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}),Comment({"id":"1:2","name":"tester","timeStamp":"2021-12-08 17:45:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[{"id":"1:2:1","name":"tester","timeStamp":"2021-12-08 17:50:30.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}]})]);
+      // object created using normal constructor for comparing.
+      Comment c2=Comment(json.decode(jsonString));
+
+      expect(json.decode(c.toString()),json.decode(c2.toString()));
+    });
+
 
     test('Comment class encode method test', () async {
       String jsonString = '{"id":"1","name":"tester","timeStamp":"2021-12-08 16:07:29.551Z","comment":"test comment","flags":["pinned","author"],"reply":[]}';
