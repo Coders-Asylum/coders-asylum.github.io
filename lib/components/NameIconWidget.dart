@@ -1,7 +1,6 @@
 // import 'dart:typed_data';\
 import 'package:flutter/material.dart';
 // import 'dart:ui' as ui;
-import 'package:flutter/rendering.dart';
 
 /// Creates an profile image icon with the first letter of the [name].
 ///
