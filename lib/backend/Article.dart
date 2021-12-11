@@ -30,30 +30,31 @@ class Post {
   /// The author id for the post.
   /// The list can contain multiple author if that is an "tutorial" type post.
   /// This id is used to fetch the author name and author image for the post.
-  final List<int> authorId;
+  final List<dynamic> authorId;
 
   /// If true then the post is displayed in the Featured Section of the blog page home as a featured post.
   final bool featured;
 
   /// List of category that the post falls under.
-  final List<String>? category;
+  final List<dynamic>? category;
 
   /// List of tags for the post.
-  final List<String>? tags;
+  final List<dynamic>? tags;
 
   /// The number of likes received by the post.
   final int likes;
 
   /// Comments list for the post.
   /// The List items are of [Comments];
-  final List<Comment>? comments;
+  late List<Comment>? comments;
 
   /// Comments list in a String format, which adheres to the JSON format obligated by the [Comment] class.
   /// This should follow the JSON format because then the comments can be mapped as Comment objects.
-  late final String? commentsString;
+  late final List<dynamic>? commentsMapObject;
 
   /// This contains the the post data is populated on object initialization.
   /// This is also populated when [Post.decode(details)] or [Post.mapDetails(postDetails)] constructor is used.
+  /// This is used to return data in operator overloading.
   late final Map<String, dynamic> postData;
 
   /// This describes all the post details.
@@ -71,20 +72,18 @@ class Post {
     this.tags,
     this.likes = 0,
     this.comments,
-    this.commentsString,
-  }) : assert(comments == null || commentsString == null, 'Comments should be passed through any one methods.') {
+    this.commentsMapObject,
+  }) : assert(comments == null || commentsMapObject == null, 'Comments should be passed through any one methods.') {
     List<Comment>? _c = [];
-    if (commentsString != null) {
-      List<String> _l = json.decode(this.commentsString!);
-
-      _l.forEach((e) {
-        _c!.add(Comment(json.decode(e)));
+    // add each comments from commentMapObject to comments  as Comment object.
+    if (commentsMapObject != null) {
+      this.commentsMapObject!.forEach((e) {
+        _c.add(Comment(e));
       });
-    } else {
-      _c = this.comments;
+      this.comments = _c;
     }
 
-    postData = {
+    this.postData = {
       "id": this.id,
       "timeStamp": this.timeStamp,
       "type": this.type,
@@ -93,10 +92,11 @@ class Post {
       "file": this.file,
       "featuredImage": this.featuredImage,
       "featured": this.featured,
+      "authorId": this.authorId,
       "category": this.category,
       "tags": this.tags,
       "likes": this.likes,
-      "comments": _c,
+      "comments": this.comments,
     };
   }
 
@@ -108,17 +108,18 @@ class Post {
   Post.mapDetails(Map<String, dynamic> postDetails)
       : this(
           id: postDetails['id'],
-          timeStamp: postDetails['timeStamp'],
+          timeStamp: DateTime.parse(postDetails['timeStamp']),
           type: postDetails['type'],
           title: postDetails['title'],
           subtitle: postDetails['subtitle'],
           file: postDetails['file'],
           featuredImage: postDetails['featuredImage'],
           featured: postDetails['featured'],
+          authorId: postDetails['authorId'],
           category: postDetails['category'],
           tags: postDetails['tags'],
           likes: postDetails['likes'],
-          comments: postDetails['comments'],
+          commentsMapObject: postDetails['comments'],
         );
 
   /// Decodes the passed [details] string into the all the Post object fields.
@@ -142,11 +143,33 @@ class Post {
     return _l;
   }
 
+  /// operator overloading to get the access data directly using keywords.
+  ///
+  /// Keywords for respective data:
+  /// ``` @json
+  /// "id": to get the unique id of the post.
+  /// "timeStamp": time and date of publishing.
+  /// "type": post type.
+  /// "title": title of the post.
+  /// "subtitle": subtitle of the post.
+  /// "file":  relative file location of the post.
+  /// "featuredImage": relative location of featured image.
+  /// "featured": post to be added in the featured section or not.
+  /// "authorId": List of author id's.
+  /// "category": List of category's,
+  /// "tags": List of tags for the post.
+  /// "likes": number of likes received.
+  /// "comments": List of comments as nested [Comment] object.
+  /// ```
+  dynamic operator [](String s) {
+    return this.postData[s];
+  }
+
   /// Generates a String that abides by the JSON object for a post data with all the details from the current object.
   @override
   String toString() {
     // String structure.
-    return '{"id": "${this.id}","timeStamp": "${this.timeStamp}","type": "${this.type}","title": "${this.title}","subtitle": "${this.subtitle}","file": "${this.file}","featuredImage": "${this.featuredImage}","featured": ${this.featured},"authorId": ${this.authorId.toString()},"category": ${this.category.toString()},"tags": ${this.tags.toString()},"likes": ${this.likes},"comments": ${this.generateCommentList()}}';
+    return '{"id": ${this.id},"timeStamp": "${this.timeStamp}","type": "${this.type}","title": "${this.title}","subtitle": "${this.subtitle}","file": "${this.file}","featuredImage": "${this.featuredImage}","featured": ${this.featured},"authorId": ${json.encode(this.authorId)},"category": ${json.encode(this.category)},"tags": ${json.encode(this.tags)},"likes": ${this.likes},"comments": ${this.generateCommentList()}}';
   }
 }
 
