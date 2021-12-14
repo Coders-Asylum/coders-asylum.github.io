@@ -20,10 +20,8 @@ void main() {
     });
 
     test('stringWithoutControlChar method test', () async {
-      expect('Creator Doer Tinkrer  Chief @Coders-Asylum   ',a.stringWithoutControlChar('Creator Doer Tinkrer\n\r\nChief @Coders-Asylum \r\n\r\n'));
+      expect('Creator Doer Tinkrer  Chief @Coders-Asylum   ', a.stringWithoutControlChar('Creator Doer Tinkrer\n\r\nChief @Coders-Asylum \r\n\r\n'));
     });
-
-
   });
 }
 
