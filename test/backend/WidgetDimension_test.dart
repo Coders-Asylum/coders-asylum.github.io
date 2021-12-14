@@ -16,7 +16,7 @@ void main() {
 
     test('WidgetDimension constructor with all values defined  test', () async {
       /// WidgetDimension instance.
-      final WidgetDimension widgetDimension = WidgetDimension(height: 123.0,width: 456.0,margin: EdgeInsets.all(8.0),padding: EdgeInsets.all(16.0));
+      final WidgetDimension widgetDimension = WidgetDimension(height: 123.0, width: 456.0, margin: EdgeInsets.all(8.0), padding: EdgeInsets.all(16.0));
 
       expect(123.0, widgetDimension.height);
       expect(456.0, widgetDimension.width);
