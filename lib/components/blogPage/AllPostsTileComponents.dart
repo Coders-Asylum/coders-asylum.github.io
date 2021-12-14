@@ -1,9 +1,14 @@
 import 'dart:ui' as ui show ImageFilter;
 import 'package:flutter/material.dart';
+import 'package:web/backend/WidgetDimension.dart';
 import 'package:web/components/NameIconWidget.dart' show NameIcon;
 import 'package:web/components/blogPage/AuthorInfoWidget.dart' show AuthorPostInfoMiniatureWidget;
 
-class Post {}
+/// Dimension for [NormalPostTile].
+const WidgetDimension normalPostTileDimension = const WidgetDimension(width: 971.0, height: 216, margin: const EdgeInsets.all(8.0), padding: const EdgeInsets.all(4.0));
+
+/// Dimension for [ImagePostTile].
+const WidgetDimension imagePostTileDimension = const WidgetDimension(width: 971.0, height: 702, margin: const EdgeInsets.all(8.0), padding: const EdgeInsets.all(8.0));
 
 /// NormalPostTile is placeholder with normal and simple post details.
 /// Such as the post, title, subtitle, post image, author name and user likes count.
@@ -42,11 +47,11 @@ class _NormalPostTileState extends State<NormalPostTile> {
     return Semantics(
       label: 'normalPost',
       child: Container(
-        height: 216,
-        width: 971,
+        height: normalPostTileDimension.height,
+        width: normalPostTileDimension.width,
         decoration: BoxDecoration(color: _backgroundColor, borderRadius: BorderRadius.circular(5.0)),
-        padding: EdgeInsets.all(4.0),
-        margin: EdgeInsets.all(8.0),
+        padding: normalPostTileDimension.padding,
+        margin: normalPostTileDimension.margin,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,12 +134,6 @@ class ImagePostTile extends StatefulWidget {
 }
 
 class _ImagePostTileState extends State<ImagePostTile> {
-  /// Height of the widget
-  static const double _height = 702;
-
-  /// Width of the widget.
-  static const double _width = 971;
-
   /// Blur strength for the subtitle container.
   static const double _blur = 8.0;
 
@@ -173,9 +172,10 @@ class _ImagePostTileState extends State<ImagePostTile> {
     return Semantics(
       label: 'imagePost',
       child: Container(
-        height: _height,
-        width: _width,
-        padding: EdgeInsets.all(8.0),
+        height: imagePostTileDimension.height,
+        width: imagePostTileDimension.width,
+        padding: imagePostTileDimension.padding,
+        margin: imagePostTileDimension.margin,
         decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(_rad)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -211,8 +211,8 @@ class _ImagePostTileState extends State<ImagePostTile> {
                   // subtitle
 
                   Positioned(
-                      bottom: _height - (_height - 16.0),
-                      left: _width - (_width - 16.0),
+                      bottom: imagePostTileDimension.height - (imagePostTileDimension.height - 16.0),
+                      left: imagePostTileDimension.width - (imagePostTileDimension.width - 16.0),
                       child: Visibility(
                         visible: widget.subtitle != null,
                         child: ClipRect(
