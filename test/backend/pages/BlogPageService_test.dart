@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:web/backend/Article.dart' show Post;
 import 'package:web/backend/pages/BlogPageService.dart';
 
-void main(){
+void main() {
   const String testJSONString = '''
 [{
 		"id": 1,
@@ -151,12 +151,12 @@ void main(){
 		}]
 	}]''';
 
-  group('BlogPageService tests',(){
-   final BlogPageService blogPageService = BlogPageService();
+  group('BlogPageService tests', () {
+    final BlogPageService blogPageService = BlogPageService();
 
-   test('generatePostList method test',(){
-     // expected post list.
-     late final List<Post> postList ;
+    test('generatePostList method test', () {
+      // expected post list.
+      late final List<Post> postList;
       // actual post list.
       List<Post> expectedPostList = [];
 
@@ -168,16 +168,13 @@ void main(){
       });
 
       expect(expectedPostList.toString(), postList.toString());
+    });
 
-   });
+    test('generateAuthorName method test', () {
+      final String expectedAuthorName = blogPageService.generateAuthorName(["1"]);
+      final String actualStringName = 'Maverick099 ';
 
-   test('generateAuthorName method test',(){
-
-     final String expectedAuthorName = blogPageService.generateAuthorName(["1"]);
-     final String actualStringName = 'Maverick099 ';
-
-
-     expect(actualStringName,expectedAuthorName);
-   });
+      expect(actualStringName, expectedAuthorName);
+    });
   });
 }
