@@ -204,7 +204,7 @@ class _ImagePostTileState extends State<ImagePostTile> {
                     width: 920,
                     decoration: BoxDecoration(
                       color: Colors.redAccent,
-                      image: DecorationImage(image: NetworkImage('/lib/assets/iron.jpg'), fit: BoxFit.fill, alignment: Alignment.center),
+                      image: DecorationImage(image: NetworkImage(widget.imageUrl!), fit: BoxFit.fill, alignment: Alignment.center),
                       borderRadius: BorderRadius.circular(_rad),
                     ),
                   ),
