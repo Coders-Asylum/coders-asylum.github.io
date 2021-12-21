@@ -468,7 +468,6 @@ class _PostsTileState extends State<PostsTile> {
     return _l;
   }
 
-
   ///
   void setHeight() {
     posts.forEach((post) {
