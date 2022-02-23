@@ -515,18 +515,18 @@ class SharePostButton {
         onPressed: () {},
         child: this.icon == null
             ? Container(
-          height: this.radius - 5,
-          width: this.radius - 5,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(this.imageUrl!), fit: BoxFit.contain),
-          ),
-        )
+                height: this.radius - 5,
+                width: this.radius - 5,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(this.imageUrl!), fit: BoxFit.contain),
+                ),
+              )
             : Container(
-          height: this.radius,
-          width: this.radius,
-          child: Icon(this.icon, color: this.iconColor, size: this.radius - 15),
-        ),
+                height: this.radius,
+                width: this.radius,
+                child: Icon(this.icon, color: this.iconColor, size: this.radius - 15),
+              ),
       ),
     );
   }
@@ -792,4 +792,3 @@ class ArticleAuthorCustomContainer extends CustomPainter {
     return true;
   }
 }
-
