@@ -31,7 +31,6 @@
 //   }
 // }
 
-
 import 'package:flutter/gestures.dart' show TapGestureRecognizer;
 import 'package:flutter/material.dart';
 
@@ -155,7 +154,7 @@ class _PostHeaderDetailsState extends State<PostHeaderDetails> {
     final TextPainter textPainter = TextPainter(
       text: TextSpan(text: text, style: style),
       textDirection: TextDirection.ltr,
-      textScaleFactor: WidgetsBinding.instance!.window.textScaleFactor,
+      textScaleFactor: WidgetsBinding.instance.window.textScaleFactor,
     )..layout();
 
     if (textPainter.size.width > MediaQuery.of(context).size.width * 0.75) {
@@ -435,10 +434,7 @@ class _AuthorInfoPostState extends State<AuthorInfoPost> {
                 width: 110.0,
 
                 ///todo: add IconImage Widget if url found null.
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage('https://avatars.githubusercontent.com/u/32545664?v=4'), fit: BoxFit.fill),
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 3.0)),
+                decoration: BoxDecoration(image: DecorationImage(image: NetworkImage('https://avatars.githubusercontent.com/u/32545664?v=4'), fit: BoxFit.fill), shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 3.0)),
               ),
             ],
           ),
@@ -533,8 +529,7 @@ class SharePostButton {
   final String? tooltip;
   final VoidCallback trigger;
 
-  const SharePostButton(
-      {required this.name, required this.trigger, this.imageUrl, this.icon, this.radius = 15.0, this.backgroundColor = const Color(0xff343434), this.iconColor = Colors.white, this.tooltip})
+  const SharePostButton({required this.name, required this.trigger, this.imageUrl, this.icon, this.radius = 15.0, this.backgroundColor = const Color(0xff343434), this.iconColor = Colors.white, this.tooltip})
       : assert(imageUrl == null || icon == null, 'Specify either image url or icon for the share button'),
         assert((radius - 5) >= 5, 'Radius should be greater or equal to 10');
 
@@ -549,18 +544,18 @@ class SharePostButton {
         onPressed: () {},
         child: this.icon == null
             ? Container(
-          height: this.radius - 5,
-          width: this.radius - 5,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(this.imageUrl!), fit: BoxFit.contain),
-          ),
-        )
+                height: this.radius - 5,
+                width: this.radius - 5,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(this.imageUrl!), fit: BoxFit.contain),
+                ),
+              )
             : Container(
-          height: this.radius,
-          width: this.radius,
-          child: Icon(this.icon, color: this.iconColor, size: this.radius - 15),
-        ),
+                height: this.radius,
+                width: this.radius,
+                child: Icon(this.icon, color: this.iconColor, size: this.radius - 15),
+              ),
       ),
     );
   }
@@ -679,7 +674,7 @@ class _CategorisedPostsWidgetState extends State<CategorisedPostsWidget> {
     final TextPainter textPainter = TextPainter(
       text: TextSpan(text: text, style: style),
       textDirection: TextDirection.ltr,
-      textScaleFactor: WidgetsBinding.instance!.window.textScaleFactor,
+      textScaleFactor: WidgetsBinding.instance.window.textScaleFactor,
     )..layout();
 
     if (textPainter.size.width > MediaQuery.of(context).size.width * 0.20) {

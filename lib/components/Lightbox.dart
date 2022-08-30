@@ -35,7 +35,7 @@ class LightBox {
   /// Displays the Lightbox immediately as soon as it is this is called.
   /// Waits for the widget to bind in the given [context] i.e: Widgets of the current context to be populated in the tree.
   LightBox.show(BuildContext context, {required this.title, this.path = './lib/assets/cat_working_hard.gif', this.content}) {
-    WidgetsBinding.instance!.addPostFrameCallback((Duration _) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration _) {
       showDialog(context: context, builder: (BuildContext context) => this.lightBoxDialog(context));
     });
   }
